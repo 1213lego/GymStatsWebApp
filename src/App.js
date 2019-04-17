@@ -29,5 +29,8 @@ class App extends Component {
     );
   }
 }
-
+class Asd extends Component
+{
+  
+}
 export default App;
