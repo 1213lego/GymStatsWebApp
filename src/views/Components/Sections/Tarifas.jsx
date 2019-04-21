@@ -38,6 +38,7 @@ class Tarifas extends React.Component{
           <TarifaCard nombre={tarifa.nombre} precio={tarifa.precio}/>
         ))
         }
+        <TarifaCard nombre="mes" precio="$69"/>
       </GridItem>
       </GridContainer>
       </div>
@@ -45,4 +46,4 @@ class Tarifas extends React.Component{
 
   }
 }
-export default Tarifas;
+export default Tarifas  ;

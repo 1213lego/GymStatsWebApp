@@ -26,12 +26,9 @@ class TarifaCard extends React.Component
     return(
       <Card pricing color="primary" style={{ maxWidth: "235px" }}>
         <CardHeader color="primary" className={classes.cardHeader}>
-
-         {this.state.nombre}
-
+         <h4>{this.state.nombre}</h4>
         </CardHeader>
            <CardBody pricing>
-
              <h3>
               {this.state.precio}
              </h3>
