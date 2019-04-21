@@ -65,8 +65,8 @@ class Components extends React.Component {
           </div>
         </Parallax>
 <div className={classNames(classes.main, classes.mainRaised)}>
-  <Tarifa/>
-  
+ASDASPDJQWPOJDWOQDJP
+
 </div>
 <Footer />
 </div>
