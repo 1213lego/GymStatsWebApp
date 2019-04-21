@@ -41,6 +41,12 @@ const cardStyle = {
     wordWrap: "break-word",
     fontSize: ".875rem",
     transition: "all 300ms linear"
+  },
+  cardPrice:{
+    border: "0",
+    marginBottom:"30px",
+    marginTop: "30px",
+    borderRadius: "6px",
   }
 };
 

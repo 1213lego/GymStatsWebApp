@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
+import Business from "@material-ui/icons/Business";
 // core components
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
@@ -14,6 +15,10 @@ import GridItem from "components/Grid/GridItem.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 // sections for this page
+import Card from "components/Card/Card.jsx";
+import CardBody from "components/Card/CardBody.jsx";
+
+
 import Tarifa from "./Sections/Tarifas.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import SectionBasics from "./Sections/SectionBasics.jsx";
@@ -65,9 +70,11 @@ class Components extends React.Component {
           </div>
         </Parallax>
 <div className={classNames(classes.main, classes.mainRaised)}>
-ASDASPDJQWPOJDWOQDJP
+<Tarifa/>
 
 </div>
+
+
 <Footer />
 </div>
 
