@@ -22,7 +22,7 @@ class Tarifas extends React.Component{
       return response.json();
     }).then(tarifas =>{
       this.setState({tarifas:tarifas});
-
+      console.log(tarifas);
     });
 
   }
@@ -35,7 +35,7 @@ class Tarifas extends React.Component{
       <GridContainer>
       <GridItem xs={12} sm={4} md={4} lg={6}>
         { this.state.tarifas.map((tarifa) => (
-          <TarifaCard nombre={tarifa.nombre} precio={tarifa.precio}/>
+          <TarifaCard nombre={tarifa.nombreTarifa} precio={tarifa.precio}/>
         ))
         }
       </GridItem>

@@ -9,34 +9,19 @@ import Button from "components/CustomButtons/Button.jsx";
 
 class TarifaCard extends React.Component
 {
-  constructor(props)
-  {
-    super(props);
-    this.state ={
-      nombre:'',
-      precio:'',
-
-    }
-
-
-  }
     render(){
-
     const{classes, ...rest} = this.props;
     return(
       <Card pricing color="primary" style={{ maxWidth: "235px" }}>
-        <CardHeader color="primary" className={classes.cardHeader}>
-
-         {this.state.nombre}
-
+        <CardHeader color="primary" >
+        
         </CardHeader>
            <CardBody pricing>
-
              <h3>
-              {this.state.precio}
+              {this.props.precio}
              </h3>
             <p>
-            DESCRIPCION
+            {this.props.nombre}
             </p>
              <Button round color="white">
                Comprar

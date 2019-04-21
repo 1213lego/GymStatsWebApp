@@ -25,13 +25,22 @@ import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
-
 import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.jsx";
-
 import image from "assets/img/bg2gym.jpg";
-import { Input } from "@material-ui/core";
-
+import { TextField, FormControl, Input } from "@material-ui/core";
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing.unit * 2,
+  },
+});
 class RegisterPage extends React.Component {
   constructor(props) {
     super(props);
@@ -52,26 +61,45 @@ class RegisterPage extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
   onChange(e) {
-    alert("sdsddsd");
-    console.log(e);
     this.setState({ [e.target.name]: e.target.value });
   }
-
   onSubmit(e) {
     e.preventDefault();
-    console.log(e);
     const nuevoCliente = {
       documento: this.state.documento,
       apellidos: this.state.apellidos,
-      email: this.email,
+      email: this.state.email,
       nombres: this.state.nombres,
-      username: this.state.username,
-      password: this.state.password,
+      autenticacionUsuarios: {
+        username: this.state.username,
+        password: this.state.password
+      },
       genero: { id: this.state.id }, //idgenero
-      tipodocumento: { tipodocumento: this.state.tipodocumento }
+      tipoDocumento: { tipodocumento: this.state.tipodocumento }
     };
     console.log(nuevoCliente);
+    var myInit =
+    {
+      method: 'POST',
+      body: JSON.stringify(nuevoCliente), headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('http://localhost:8080/signup', myInit)
+      .then(response => {
+        if(response.status==201)
+        {
+          alert("Se ha registrado satisfatoriamente");
+        }
+        else{
+          alert("Ha fallado el registro");
+        }
+        return response.json();
+      }).then(user => {
+        console.log(user);
+      }).catch(error => alert(error));
   }
 
   componentDidMount() {
@@ -98,6 +126,8 @@ class RegisterPage extends React.Component {
       this.setState({ tiposdocumento: tipos });
       console.log(this.state.tiposdocumento);
     });
+
+
   }
   render() {
     const { classes, ...rest } = this.props;
@@ -131,9 +161,12 @@ class RegisterPage extends React.Component {
                     <CardBody>
                       <GridContainer>
                         <GridItem xs={12} sm={4} md={4} lg={6}>
-                          <CustomInput
+                          <TextField
+                            className={classes.textField}
                             name="nombres"
                             labelText="Nombres"
+                            label="Nombres"
+                            margin="normal"
                             id="nombres"
                             formControlProps={{
                               fullWidth: true
@@ -151,47 +184,47 @@ class RegisterPage extends React.Component {
                         </GridItem>
 
                         <GridItem xs={12} sm={4} md={4} lg={4}>
-                          <InputLabel htmlFor="genero">Genero</InputLabel>
-                          <Select
-                            name="genero"
-                            value={this.state.generos}
-                            onChange={this.handleChange('name')}
-                            inputProps={{
-                              name: 'genero',
-                              id: 'genero',
-                            }}
-                          >
-                            {
-                              this.state.generos.map((genero) => (
-                                <MenuItem value={genero.id}>{genero.genero}</MenuItem>
-                              ))
-                            }
-                          </Select>
+                          <FormControl className={styles.formControl}>
+                            <InputLabel htmlFor="genero">Genero</InputLabel>
+                            <Select
+                              name="id"
+                              label="genero"
+                              value={this.state.id}
+                              onChange={this.onChange}
+                              input={<Input name="genero" id="id" />}
+                            >
+                              {
+                                this.state.generos.map((genero) => (
+
+                                  <MenuItem value={genero.id}>{genero.genero}</MenuItem>
+                                ))
+                              }
+                            </Select>
+                          </FormControl>
                         </GridItem>
                         <GridItem xs={12} sm={4} md={4} lg={4}>
-                          <InputLabel >Tipo de Documento </InputLabel>
-                          <Select
-                            name="tipoDocumento"
-                            value={this.state.tiposdocumento}
-                            onChange={this.handleChange}
-                            inputProps={{
-                              name: 'genero',
-                              id: 'genero',
-                            }}
-                          >
-                            {
-                              this.state.tiposdocumento.map((tipodocumento) => (
-                                <MenuItem value={tipodocumento.tipodocumento}>{tipodocumento.nombreDocumento}</MenuItem>
-                              ))
-                            }
-                          </Select>
+                          <FormControl>
+                            <InputLabel className={styles.formControl}>Tipo de Documento </InputLabel>
+                            <Select
+                              name="tipodocumento"
+                              value={this.state.tipodocumento}
+                              onChange={this.onChange}
+                            >
+                              {
+                                this.state.tiposdocumento.map((tipodocumento) => (
+                                  <MenuItem value={tipodocumento.tipodocumento}>{tipodocumento.nombreDocumento}</MenuItem>
+                                ))
+                              }
+                            </Select>
+                          </FormControl>
                         </GridItem>
 
                       </GridContainer>
                       <GridContainer>
                         <GridItem xs={12} sm={4} md={4} lg={6}>
-                          <CustomInput
+                          <TextField
                             name="apellidos"
+                            label="Apellidos"
                             onChange={this.onChange}
                             labelText="Apellidos"
                             id="apellidos"
@@ -211,22 +244,17 @@ class RegisterPage extends React.Component {
                         </GridItem>
 
                         <GridItem xs={12} sm={4} md={4} lg={6}>
-                          <CustomInput
+                          <TextField
+                            className={classes.textField}
                             labelText="Numero Identificacion"
                             name="documento"
+                            label="Numero de identificacion"
                             onChange={this.onChange}
                             id="nombres"
                             formControlProps={{
                               fullWidth: true
                             }}
-                            inputProps={{
-                              type: "text",
-                              endAdornment: (
-                                <InputAdornment position="end">
-                                  <Register className={classes.inputIconsColor} />
-                                </InputAdornment>
-                              )
-                            }}
+                            type="number"
                           />
                         </GridItem>
 
@@ -234,8 +262,9 @@ class RegisterPage extends React.Component {
                       </GridContainer>
                       <GridContainer>
                         <GridItem xs={12} sm={4} md={4} lg={6}>
-                          <CustomInput
-                            labelText="Nombre de Usuario..."
+                          <TextField
+                            className={classes.textField}
+                            label="Nombre de Usuario..."
                             onChange={this.onChange}
                             id="username"
                             name="username"
@@ -255,10 +284,13 @@ class RegisterPage extends React.Component {
                         </GridItem>
 
                       </GridContainer>
-                      <CustomInput
+                      <TextField
+                        className={classes.textField}
                         name="email"
+                        label="Email"
                         onChange={this.onChange}
                         labelText="Email..."
+                        type="email"
                         id="Email"
                         formControlProps={{
                           fullWidth: true
@@ -273,10 +305,12 @@ class RegisterPage extends React.Component {
                           )
                         }}
                       />
-                      <CustomInput
+                      <TextField
+                        className={classes.textField}
                         onChange={this.onChange}
-                        labelText="Password..."
+                        label="Password..."
                         name="password"
+
                         id="pass"
                         formControlProps={{
                           fullWidth: true
