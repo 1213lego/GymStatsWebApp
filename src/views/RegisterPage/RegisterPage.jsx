@@ -36,7 +36,8 @@ class RegisterPage extends React.Component {
     super(props);
     // we use this to make the card to appear after the page has been rendered
     this.state = {
-      cardAnimaton: "cardHidden"
+      cardAnimaton: "cardHidden",
+      generos: []
     };
   }
   componentDidMount() {
@@ -48,6 +49,14 @@ class RegisterPage extends React.Component {
       700
     );
   }
+  componentWillMount(){
+    fetch('http://localhost:8080/generos').then(response=>{
+      return response.json();
+    }).then(generos=>{
+      console.log(generos);
+      this.setState({generos: generos});
+    });
+  } 
   render() {
     const { classes, ...rest} = this.props;
     return (
