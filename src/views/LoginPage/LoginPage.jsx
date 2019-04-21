@@ -28,8 +28,26 @@ class LoginPage extends React.Component {
     super(props);
     // we use this to make the card to appear after the page has been rendered
     this.state = {
-      cardAnimaton: "cardHidden"
+      cardAnimaton: "cardHidden",
+      username: '',
+      password: ''
     };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+  onChange(e) {
+    console.log(e);
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    console.log(e);
+    const login = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    console.log(login);
   }
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
@@ -99,6 +117,8 @@ class LoginPage extends React.Component {
                     <p className={classes.divider}>Ingresa ahora y empieza a construir tu futuro</p>
                     <CardBody>
                       <CustomInput
+
+                      name="username"
                         labelText="Nombre de Usuario..."
                         id="username"
                         formControlProps={{
@@ -115,6 +135,7 @@ class LoginPage extends React.Component {
                       />
 
                       <CustomInput
+                      name="password"
                         labelText="Password..."
                         id="pass"
                         formControlProps={{

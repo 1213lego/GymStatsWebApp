@@ -30,6 +30,7 @@ import CustomInput from "components/CustomInput/CustomInput.jsx";
 import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.jsx";
 
 import image from "assets/img/bg2gym.jpg";
+import { Input } from "@material-ui/core";
 
 class RegisterPage extends React.Component {
   constructor(props) {
@@ -37,28 +38,69 @@ class RegisterPage extends React.Component {
     // we use this to make the card to appear after the page has been rendered
     this.state = {
       cardAnimaton: "cardHidden",
-      generos: []
+      generos: [],
+      tiposdocumento: [],
+      documento: '',
+      apellidos: '',
+      email: '',
+      nombres: '',
+      username: '',
+      password: '',
+      id: null, //idgenero
+      tipodocumento: null
     };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
+  onChange(e) {
+    alert("sdsddsd");
+    console.log(e);
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    console.log(e);
+    const nuevoCliente = {
+      documento: this.state.documento,
+      apellidos: this.state.apellidos,
+      email: this.email,
+      nombres: this.state.nombres,
+      username: this.state.username,
+      password: this.state.password,
+      genero: { id: this.state.id }, //idgenero
+      tipodocumento: { tipodocumento: this.state.tipodocumento }
+    };
+    console.log(nuevoCliente);
+  }
+
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
     setTimeout(
-      function() {
+      function () {
         this.setState({ cardAnimaton: "" });
       }.bind(this),
       700
     );
   }
-  componentWillMount(){
-    fetch('http://localhost:8080/generos').then(response=>{
+  componentWillMount() {
+
+    fetch('http://localhost:8080/generos').then(response => {
       return response.json();
-    }).then(generos=>{
-      console.log(generos);
-      this.setState({generos: generos});
+    }).then(generos => {
+      this.setState({ generos: generos });
+      console.log(this.state.generos);
     });
-  } 
+
+    fetch('http://localhost:8080/tiposdocumento').then(response => {
+      return response.json();
+    }).then(tipos => {
+      this.setState({ tiposdocumento: tipos });
+      console.log(this.state.tiposdocumento);
+    });
+  }
   render() {
-    const { classes, ...rest} = this.props;
+    const { classes, ...rest } = this.props;
     return (
       <div>
         <Header
@@ -80,20 +122,144 @@ class RegisterPage extends React.Component {
             <GridContainer justify="left">
               <GridItem xs={12} sm={12} md={4}>
                 <Card style={{ width: "50rem" }} className={classes[this.state.cardAnimaton]}>
-                  <form className={classes.form}>
+                  <form className={classes.form}
+                    onSubmit={this.onSubmit}>
                     <CardHeader color="primary" className={classes.cardHeader}>
                       <h4>Registro</h4>
                     </CardHeader>
                     <p className={classes.divider}>Estás a un paso de empezar a gozar de todo lo que tenemos para ti... ¡Registrate!</p>
-
                     <CardBody>
-                    <GridContainer>
+                      <GridContainer>
+                        <GridItem xs={12} sm={4} md={4} lg={6}>
+                          <CustomInput
+                            name="nombres"
+                            labelText="Nombres"
+                            id="nombres"
+                            formControlProps={{
+                              fullWidth: true
+                            }}
+                            inputProps={{
+                              type: "text",
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <Register className={classes.inputIconsColor} />
+                                </InputAdornment>
+                              )
+                            }}
+                            onChange={this.onChange}
+                          />
+                        </GridItem>
+
+                        <GridItem xs={12} sm={4} md={4} lg={4}>
+                          <InputLabel htmlFor="genero">Genero</InputLabel>
+                          <Select
+                            name="genero"
+                            value={this.state.generos}
+                            onChange={this.handleChange('name')}
+                            inputProps={{
+                              name: 'genero',
+                              id: 'genero',
+                            }}
+                          >
+                            {
+                              this.state.generos.map((genero) => (
+                                <MenuItem value={genero.id}>{genero.genero}</MenuItem>
+                              ))
+                            }
+                          </Select>
+                        </GridItem>
+                        <GridItem xs={12} sm={4} md={4} lg={4}>
+                          <InputLabel >Tipo de Documento </InputLabel>
+                          <Select
+                            name="tipoDocumento"
+                            value={this.state.tiposdocumento}
+                            onChange={this.handleChange}
+                            inputProps={{
+                              name: 'genero',
+                              id: 'genero',
+                            }}
+                          >
+                            {
+                              this.state.tiposdocumento.map((tipodocumento) => (
+                                <MenuItem value={tipodocumento.tipodocumento}>{tipodocumento.nombreDocumento}</MenuItem>
+                              ))
+                            }
+                          </Select>
+                        </GridItem>
+
+                      </GridContainer>
+                      <GridContainer>
+                        <GridItem xs={12} sm={4} md={4} lg={6}>
+                          <CustomInput
+                            name="apellidos"
+                            onChange={this.onChange}
+                            labelText="Apellidos"
+                            id="apellidos"
+                            formControlProps={{
+                              fullWidth: true
+
+                            }}
+                            inputProps={{
+                              type: "text",
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <Register className={classes.inputIconsColor} />
+                                </InputAdornment>
+                              )
+                            }}
+                          />
+                        </GridItem>
+
+                        <GridItem xs={12} sm={4} md={4} lg={6}>
+                          <CustomInput
+                            labelText="Numero Identificacion"
+                            name="documento"
+                            onChange={this.onChange}
+                            id="nombres"
+                            formControlProps={{
+                              fullWidth: true
+                            }}
+                            inputProps={{
+                              type: "text",
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <Register className={classes.inputIconsColor} />
+                                </InputAdornment>
+                              )
+                            }}
+                          />
+                        </GridItem>
 
 
-                      <GridItem xs={12} sm={4} md={4} lg={6}>
+                      </GridContainer>
+                      <GridContainer>
+                        <GridItem xs={12} sm={4} md={4} lg={6}>
+                          <CustomInput
+                            labelText="Nombre de Usuario..."
+                            onChange={this.onChange}
+                            id="username"
+                            name="username"
+                            formControlProps={{
+                              fullWidth: true
+
+                            }}
+                            inputProps={{
+                              type: "text",
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <People className={classes.inputIconsColor} />
+                                </InputAdornment>
+                              )
+                            }}
+                          />
+                        </GridItem>
+
+                      </GridContainer>
                       <CustomInput
-                        labelText="Nombres"
-                        id="nombres"
+                        name="email"
+                        onChange={this.onChange}
+                        labelText="Email..."
+                        id="Email"
                         formControlProps={{
                           fullWidth: true
                         }}
@@ -101,112 +267,16 @@ class RegisterPage extends React.Component {
                           type: "text",
                           endAdornment: (
                             <InputAdornment position="end">
-                              <Register className={classes.inputIconsColor} />
+                              <Email className={classes.inputIconsColor} />
+
                             </InputAdornment>
                           )
                         }}
                       />
-                      </GridItem>
-
-                    <GridItem xs={12} sm={4} md={4} lg={6}>
-                    <InputLabel htmlFor="genero">Genero</InputLabel>
-                      <Select
-                        value={this.state.genero}
-                        onChange={this.handleChange}
-                        inputProps={{
-                          name: 'genero',
-                          id: 'genero',
-                        }}
-                      >
-                        <MenuItem value="">
-                          <em></em>
-                        </MenuItem>
-                        <MenuItem value={1}>Masculino</MenuItem>
-                        <MenuItem value={2}>Femenino</MenuItem>
-                        <MenuItem value={3}>No especificar</MenuItem>
-                      </Select>
-                      </GridItem>
-
-                    </GridContainer>
-                    <GridContainer>
-                      <GridItem xs={12} sm={4} md={4} lg={6}>
-                        <CustomInput
-                          labelText="Apellidos"
-                          id="apellidos"
-                          formControlProps={{
-                            fullWidth: true
-
-                          }}
-                          inputProps={{
-                            type: "text",
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <Register className={classes.inputIconsColor} />
-                              </InputAdornment>
-                            )
-                          }}
-                        />
-                        </GridItem>
-
-                      <GridItem xs={12} sm={4} md={4} lg={6}>
                       <CustomInput
-                        labelText="Numero Identificacion"
-                        id="nombres"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          type: "text",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Register className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          )
-                        }}
-                      />
-                      </GridItem>
-
-
-                    </GridContainer>
-                    <GridContainer>
-                      <GridItem xs={12} sm={4} md={4} lg={6}>
-                        <CustomInput
-                          labelText="Nombre de Usuario..."
-                          id="username"
-                          formControlProps={{
-                            fullWidth: true
-
-                          }}
-                          inputProps={{
-                            type: "text",
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <People className={classes.inputIconsColor} />
-                              </InputAdornment>
-                            )
-                          }}
-                        />
-                        </GridItem>
-
-                    </GridContainer>
-                    <CustomInput
-                      labelText="Email..."
-                      id="Email"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "text",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor}/>
-
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                      <CustomInput
+                        onChange={this.onChange}
                         labelText="Password..."
+                        name="password"
                         id="pass"
                         formControlProps={{
                           fullWidth: true
@@ -224,7 +294,9 @@ class RegisterPage extends React.Component {
                       />
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
-                      <Button simple color="primary" size="lg">
+                      <Button
+                        type="submit"
+                        simple color="primary" size="lg">
                         Registrarse
                       </Button>
                     </CardFooter>
