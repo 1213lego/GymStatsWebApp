@@ -24,15 +24,16 @@ function Footer({ ...props }) {
   return (
     <footer className={footerClasses}>
       <div className={classes.container}>
-        <div className={classes.left}>
+      
+        <div className={classes.right}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/"
+                href="https://gymstats.atlassian.net/secure/RapidBoard.jspa?rapidView=2&projectKey=GS&view=planning.nodetail"
                 className={classes.block}
                 target="_blank"
               >
-                Creative Tim
+                Compila pero no hace nada
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
@@ -64,18 +65,7 @@ function Footer({ ...props }) {
             </ListItem>
           </List>
         </div>
-        <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} , made with{" "}
-          <Favorite className={classes.icon} /> by{" "}
-          <a
-            href="https://www.creative-tim.com"
-            className={aClasses}
-            target="_blank"
-          >
-            Creative Tim
-          </a>{" "}
-          for a better web.
-        </div>
+
       </div>
     </footer>
   );

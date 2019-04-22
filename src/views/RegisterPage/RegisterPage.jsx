@@ -149,148 +149,142 @@ class RegisterPage extends React.Component {
             backgroundPosition: "top center"
           }}
         >
-          <div className={classes.container}>
+          <div className={classes.container} style={{ justifyContent:"center", display:"flex"}}>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={4}>
-                <Card style={{ width: "40rem" }} className={classes[this.state.cardAnimaton]}>
+              <GridItem xs={12} sm={12} md={12}>
+                <Card  className={classes[this.state.cardAnimaton]}>
                   <form className={classes.form}
                     onSubmit={this.onSubmit}>
                     <CardHeader color="primary" className={classes.cardHeader}>
-                      <h4>Registro</h4>
+                      <h3>Registro</h3>
                     </CardHeader>
-                    <p className={classes.divider}>Estás a un paso de empezar a gozar de todo lo que tenemos para ti... ¡Registrate!</p>
+                    <h4 className={classes.divider}>Estás a un paso de empezar a gozar de todo lo que tenemos para ti...<br/> ¡Registrate!</h4>
                     <CardBody>
-                      <GridContainer>
-                        <GridItem xs={12} sm={4} md={4} lg={6}>
-                          <TextField
-                            className={classes.textField}
-                            name="nombres"
-                            labelText="Nombres"
-                            label="Nombres"
-                            margin="normal"
-                            id="nombres"
-                            formControlProps={{
-                              fullWidth: true
-                            }}
-                            inputProps={{
-                              type: "text",
-                              endAdornment: (
-                                <InputAdornment position="end">
-                                  <Register className={classes.inputIconsColor} />
-                                </InputAdornment>
-                              )
-                            }}
-                            onChange={this.onChange}
-                          />
-                          <TextField
-                          className={classes.textField}
-                            name="apellidos"
-                            label="Apellidos"
-                            onChange={this.onChange}
-                            labelText="Apellidos"
-                            id="apellidos"
-                            formControlProps={{
-                              fullWidth: true
+                    <div style={{marginLeft:"auto",marginRight:"auto"}}>
+                    <TextField
+                      className={classes.textField}
+                      name="nombres"
+                      labelText="Nombres"
+                      label="Nombres..."
+                      margin="normal"
+                      id="nombres"
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        type: "text",
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Register className={classes.inputIconsColor} />
+                          </InputAdornment>
+                        )
+                      }}
+                      onChange={this.onChange}
+                    />
+                    <TextField
+                    className={classes.textField}
+                      margin="normal"
+                      name="apellidos"
+                      label="Apellidos..."
+                      onChange={this.onChange}
+                      labelText="Apellidos"
+                      id="apellidos"
+                      formControlProps={{
+                        fullWidth: true
 
-                            }}
-                            inputProps={{
-                              type: "text",
-                              endAdornment: (
-                                <InputAdornment position="end">
-                                  <Register className={classes.inputIconsColor} />
-                                </InputAdornment>
-                              )
-                            }}
-                          />
-                        </GridItem>
-                        <GridItem xs={12} sm={4} md={4} lg={6}>
-                        <FormControl className={styles.formControl}>
-                          <InputLabel htmlFor="genero">Genero</InputLabel>
-                          <Select
-                            name="id"
-                            label="genero"
-                            value={this.state.id}
-                            onChange={this.onChange}
-                            input={<Input name="genero" id="id" />}
-                          >
-                            {
-                              this.state.generos.map((genero) => (
+                      }}
+                      inputProps={{
+                        type: "text",
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Register className={classes.inputIconsColor} />
+                          </InputAdornment>
+                        )
+                      }}
+                    />
+                    <br/>
+                    <TextField
+                      id="tipodocumentoSpinner"
+                      select
+                        name="tipodocumento"
+                        label="Tipo Documento"
+                        className={classes.textField}
+                        margin="normal"
+                        value={this.state.tipodocumento}
+                        onChange={this.onChange}
+                        SelectProps={{
+                          MenuProps: {
+                            className: classes.menu,
+                          },
+                        }}
+                      >
+                        {
+                          this.state.tiposdocumento.map((tipodocumento) => (
+                            <MenuItem value={tipodocumento.tipodocumento}>{tipodocumento.nombreDocumento}</MenuItem>
+                          ))
+                        }
+                      </TextField>
+                    <TextField
+                      className={classes.textField}
+                      labelText="Numero Identificacion"
+                      name="documento"
+                      label="Numero de identificacion"
+                      onChange={this.onChange}
+                      id="nombres"
+                      margin = "normal"
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      type="number"
+                    />
+                    <br/>
 
-                                <MenuItem value={genero.id}>{genero.genero}</MenuItem>
-                              ))
-                            }
-                          </Select>
-                        </FormControl>
 
-
-
-
-                        </GridItem>
-
-                        <GridItem xs={12} sm={4} md={4} lg={6}>
-
-                        </GridItem>
-
-
-                      </GridContainer>
-                      <GridContainer>
-                      <GridItem xs={12} sm={4} md={4} lg={6}>
-                      <FormControl>
-                        <InputLabel className={styles.formControl}>Tipo de Documento </InputLabel>
-                        <Select
-                          name="tipodocumento"
-                          value={this.state.tipodocumento}
-                          onChange={this.onChange}
+                    <TextField
+                        id="generoSpinner"
+                        select
+                        label="Genero"
+                        className={classes.textField}
+                        name="id"
+                        margin="normal"
+                        value={this.state.id}
+                        onChange={this.onChange}
+                        SelectProps={{
+                          MenuProps: {
+                            className: classes.menu,
+                          },
+                        }}
+                        input={<Input name="genero" id="id" />}
                         >
-                          {
-                            this.state.tiposdocumento.map((tipodocumento) => (
-                              <MenuItem value={tipodocumento.tipodocumento}>{tipodocumento.nombreDocumento}</MenuItem>
-                            ))
-                          }
-                        </Select>
-                      </FormControl>
+                        {
+                          this.state.generos.map((genero) => (
 
-                        <TextField
-                          className={classes.textField}
-                          labelText="Numero Identificacion"
-                          name="documento"
-                          label="Numero de identificacion"
-                          onChange={this.onChange}
-                          id="nombres"
-                          formControlProps={{
-                            fullWidth: true
-                          }}
-                          type="number"
-                        />
-                      </GridItem>
+                            <MenuItem value={genero.id}>{genero.genero}</MenuItem>
+                          ))
+                        }
+                        </TextField>
 
+                    <br/>
+                      <TextField
+                        className={classes.textField}
+                        label="Nombre de Usuario..."
+                        onChange={this.onChange}
+                        id="username"
+                        name="username"
+                        formControlProps={{
+                          fullWidth: true
 
-
-                      </GridContainer>
-                      <GridContainer>
-                        <GridItem xs={12} sm={4} md={4} lg={6}>
-                          <TextField
-                            className={classes.textField}
-                            label="Nombre de Usuario..."
-                            onChange={this.onChange}
-                            id="username"
-                            name="username"
-                            formControlProps={{
-                              fullWidth: true
-
-                            }}
-                            inputProps={{
-                              type: "text",
-                              endAdornment: (
-                                <InputAdornment position="end">
-                                  <People className={classes.inputIconsColor} />
-                                </InputAdornment>
-                              )
-                            }}
-                          />
-                        </GridItem>
-
-                      </GridContainer>
+                        }}
+                        inputProps={{
+                          type: "text",
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <People className={classes.inputIconsColor} />
+                            </InputAdornment>
+                          )
+                        }}
+                      />
+                      <br/>
                       <TextField
                         className={classes.textField}
                         name="email"
@@ -312,6 +306,7 @@ class RegisterPage extends React.Component {
                           )
                         }}
                       />
+                      <br/>
                       <TextField
                         className={classes.textField}
                         onChange={this.onChange}
@@ -333,6 +328,9 @@ class RegisterPage extends React.Component {
                           )
                         }}
                       />
+                      </div>
+
+
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
                       <Button
