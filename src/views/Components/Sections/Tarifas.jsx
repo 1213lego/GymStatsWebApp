@@ -32,18 +32,27 @@ class Tarifas extends React.Component {
   render() {
     const tarifas = this.state.tarifas;
     return (
-      <div>
-        <GridContainer>
-          <GridItem xs={12} sm={4} md={4} lg={6}>
+      <div style={{justifyContent:'center', alignItems:'center'}}>
+        <div style={{position:"center", marginTop:"20px", justifyContent:"center", display:"flex"}}>
+            <h1> Nuestras Tarifas</h1>
+        </div>
+        <div style={{alignItems:"center",display:"block",justifyContent:"center",marginTop:"20px"}}>
+        <GridContainer justify="center" alignItems="center">
+
             {tarifas.map(tarifa => (
+              <GridItem xs={12} sm={4} md={4} lg={2}>
               <TarifaCard
                 key={tarifa.id}
                 nombre={tarifa.nombreTarifa}
                 precio={tarifa.precio}
               />
+              </GridItem>
             ))}
-          </GridItem>
+
+
+
         </GridContainer>
+        </div>
       </div>
     );
   }

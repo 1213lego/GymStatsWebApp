@@ -12,7 +12,12 @@ class TarifaCard extends React.Component
     render(){
     const{classes, ...rest} = this.props;
     return(
-     <Card pricing color="primary" style={{ maxWidth: "235px" }}>
+     <Card pricing color="primary"
+      style={{
+          marginTop:"2px",
+          position : "relative",
+          maxWidth: "235px"
+       }}>
        <CardHeader color="primary" >
        {this.props.nombre}
         </CardHeader>
@@ -20,7 +25,7 @@ class TarifaCard extends React.Component
              <h3>
               ${this.props.precio}
              </h3>
-            
+
              <Button round color="white">
                Comprar
              </Button>
