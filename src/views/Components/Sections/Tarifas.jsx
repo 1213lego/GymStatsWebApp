@@ -33,13 +33,15 @@ class Tarifas extends React.Component{
     return(
       <div>
       <GridContainer>
-      <GridItem xs={12} sm={4} md={4} lg={6}>
+
         { this.state.tarifas.map((tarifa) => (
+          <GridItem xs={12} sm={4} md={4} lg={6}>
           <TarifaCard nombre={tarifa.nombreTarifa} precio={tarifa.precio}/>
+          </GridItem>
         ))
         }
-        <TarifaCard nombre="mes" precio="$69"/>
-      </GridItem>
+
+
       </GridContainer>
       </div>
     )

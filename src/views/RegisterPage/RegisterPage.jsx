@@ -34,7 +34,8 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   formControl: {
-    margin: theme.spacing.unit,
+    margin: "0 0 17px 0",
+    position : "relative",
     minWidth: 120,
   },
   selectEmpty: {
@@ -149,9 +150,9 @@ class RegisterPage extends React.Component {
           }}
         >
           <div className={classes.container}>
-            <GridContainer justify="left">
+            <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={4}>
-                <Card style={{ width: "50rem" }} className={classes[this.state.cardAnimaton]}>
+                <Card style={{ width: "40rem" }} className={classes[this.state.cardAnimaton]}>
                   <form className={classes.form}
                     onSubmit={this.onSubmit}>
                     <CardHeader color="primary" className={classes.cardHeader}>
@@ -181,48 +182,8 @@ class RegisterPage extends React.Component {
                             }}
                             onChange={this.onChange}
                           />
-                        </GridItem>
-
-                        <GridItem xs={12} sm={4} md={4} lg={4}>
-                          <FormControl className={styles.formControl}>
-                            <InputLabel htmlFor="genero">Genero</InputLabel>
-                            <Select
-                              name="id"
-                              label="genero"
-                              value={this.state.id}
-                              onChange={this.onChange}
-                              input={<Input name="genero" id="id" />}
-                            >
-                              {
-                                this.state.generos.map((genero) => (
-
-                                  <MenuItem value={genero.id}>{genero.genero}</MenuItem>
-                                ))
-                              }
-                            </Select>
-                          </FormControl>
-                        </GridItem>
-                        <GridItem xs={12} sm={4} md={4} lg={4}>
-                          <FormControl>
-                            <InputLabel className={styles.formControl}>Tipo de Documento </InputLabel>
-                            <Select
-                              name="tipodocumento"
-                              value={this.state.tipodocumento}
-                              onChange={this.onChange}
-                            >
-                              {
-                                this.state.tiposdocumento.map((tipodocumento) => (
-                                  <MenuItem value={tipodocumento.tipodocumento}>{tipodocumento.nombreDocumento}</MenuItem>
-                                ))
-                              }
-                            </Select>
-                          </FormControl>
-                        </GridItem>
-
-                      </GridContainer>
-                      <GridContainer>
-                        <GridItem xs={12} sm={4} md={4} lg={6}>
                           <TextField
+                          className={classes.textField}
                             name="apellidos"
                             label="Apellidos"
                             onChange={this.onChange}
@@ -242,21 +203,67 @@ class RegisterPage extends React.Component {
                             }}
                           />
                         </GridItem>
+                        <GridItem xs={12} sm={4} md={4} lg={6}>
+                        <FormControl className={styles.formControl}>
+                          <InputLabel htmlFor="genero">Genero</InputLabel>
+                          <Select
+                            name="id"
+                            label="genero"
+                            value={this.state.id}
+                            onChange={this.onChange}
+                            input={<Input name="genero" id="id" />}
+                          >
+                            {
+                              this.state.generos.map((genero) => (
+
+                                <MenuItem value={genero.id}>{genero.genero}</MenuItem>
+                              ))
+                            }
+                          </Select>
+                        </FormControl>
+
+
+
+
+                        </GridItem>
 
                         <GridItem xs={12} sm={4} md={4} lg={6}>
-                          <TextField
-                            className={classes.textField}
-                            labelText="Numero Identificacion"
-                            name="documento"
-                            label="Numero de identificacion"
-                            onChange={this.onChange}
-                            id="nombres"
-                            formControlProps={{
-                              fullWidth: true
-                            }}
-                            type="number"
-                          />
+
                         </GridItem>
+
+
+                      </GridContainer>
+                      <GridContainer>
+                      <GridItem xs={12} sm={4} md={4} lg={6}>
+                      <FormControl>
+                        <InputLabel className={styles.formControl}>Tipo de Documento </InputLabel>
+                        <Select
+                          name="tipodocumento"
+                          value={this.state.tipodocumento}
+                          onChange={this.onChange}
+                        >
+                          {
+                            this.state.tiposdocumento.map((tipodocumento) => (
+                              <MenuItem value={tipodocumento.tipodocumento}>{tipodocumento.nombreDocumento}</MenuItem>
+                            ))
+                          }
+                        </Select>
+                      </FormControl>
+
+                        <TextField
+                          className={classes.textField}
+                          labelText="Numero Identificacion"
+                          name="documento"
+                          label="Numero de identificacion"
+                          onChange={this.onChange}
+                          id="nombres"
+                          formControlProps={{
+                            fullWidth: true
+                          }}
+                          type="number"
+                        />
+                      </GridItem>
+
 
 
                       </GridContainer>
