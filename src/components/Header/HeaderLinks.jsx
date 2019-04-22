@@ -17,9 +17,10 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 
 import headerLinksStyle from "assets/jss/material-kit-react/components/headerLinksStyle.jsx";
-
+import {tipoUsuario, validarToken} from "../../index.js"
 function HeaderLinks({ ...props }) {
   const { classes } = props;
+  let pTipo=tipoUsuario;
   return (
     <List className={classes.list}>
     <ListItem className={classes.listItem}>
@@ -27,7 +28,9 @@ function HeaderLinks({ ...props }) {
         Inicio
       </Link>
     </ListItem>
-      <ListItem className={classes.listItem}>
+    {console.log(pTipo)}
+    {
+      pTipo=="ROLE_ADMIN" ? <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
           buttonText="Prueba"
@@ -49,8 +52,8 @@ function HeaderLinks({ ...props }) {
             </a>
           ]}
         />
-      </ListItem>
-
+    </ListItem> :<p> </p>
+    }
       <ListItem className={classes.listItem}>
         <Link to="/register-page" className={classes.navLink}>
           Registro
@@ -116,5 +119,4 @@ function HeaderLinks({ ...props }) {
     </List>
   );
 }
-
 export default withStyles(headerLinksStyle)(HeaderLinks);

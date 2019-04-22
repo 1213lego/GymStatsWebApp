@@ -1,1 +1,1 @@
-const BASE_URL = "http://localhost:8080/generos";
+const BASE_URL = "http://localhost:8080/";

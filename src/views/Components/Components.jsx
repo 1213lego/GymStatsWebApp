@@ -69,14 +69,11 @@ class Components extends React.Component {
             </GridContainer>
           </div>
         </Parallax>
-<div className={classNames(classes.main, classes.mainRaised)}>
-<Tarifa/>
-
-</div>
-
-
-<Footer />
-</div>
+        <div className={classNames(classes.main, classes.mainRaised)}>
+          <Tarifa />
+        </div>
+        <Footer />
+      </div>
 
     );
   }

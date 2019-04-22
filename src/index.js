@@ -11,7 +11,6 @@ import LandingPage from "views/LandingPage/LandingPage.jsx";
 import ProfilePage from "views/ProfilePage/ProfilePage.jsx";
 import LoginPage from "views/LoginPage/LoginPage.jsx";
 import RegisterPage from "views/RegisterPage/RegisterPage.jsx";
-
 var hist = createBrowserHistory();
 
 ReactDOM.render(
@@ -26,3 +25,31 @@ ReactDOM.render(
   </Router>,
   document.getElementById("root")
 );
+export let tipoUsuario;
+export async function validarToken() {
+  const item = localStorage.getItem("jwtresponse");
+  var resultado = '';
+  if (item)
+  {
+    var myInit =
+    {
+      method: 'POST',
+      body: item,
+      headers:
+      {
+        'Content-Type': 'application/json'
+      }
+    };
+    let response=await fetch('http://localhost:8080/validate', myInit)
+    let data= await response.json();
+    resultado= data.usuario;
+    if(resultado=="expirado")
+    {
+      console.log("removio");
+      localStorage.removeItem("token");
+      localStorage.removeItem("jwtresponse");
+    }
+  }
+  tipoUsuario=resultado;
+  return resultado;
+}
