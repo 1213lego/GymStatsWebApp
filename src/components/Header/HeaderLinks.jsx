@@ -133,7 +133,7 @@ function MenuAdmin(props) {
             buttonIcon={Apps}
             dropdownList={[
               <Link to="/registerEmployer" className={props.classes.dropdownLink}>
-                All components
+                Registrar Empleado
             </Link>,
               <a
                 href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
