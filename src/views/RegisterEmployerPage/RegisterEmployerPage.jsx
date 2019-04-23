@@ -28,6 +28,7 @@ import CardFooter from "components/Card/CardFooter.jsx";
 import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.jsx";
 import image from "assets/img/bg2gym.jpg";
 import { TextField, FormControl, Input } from "@material-ui/core";
+import { validarToken } from "../..";
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -60,13 +61,15 @@ class RegisterPage extends React.Component {
       id: null, //idgenero
       tipodocumento: null,
       idTipo: null,
-      tipoUsuario:''
+      autorizado: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange(e) {
+    console.log(e.target.name);
+    console.log(e.target.value);
     this.setState({ [e.target.name]: e.target.value });
   }
   onSubmit(e) {
@@ -79,9 +82,7 @@ class RegisterPage extends React.Component {
       empleado:
       {
         tipoEmpleado:{
-          idTipo:this.state.idTipoEmpleado,
-          tipoUsuario: this.state.tipoUsuario 
-
+          idTipo:this.state.idTipo
         }
       },
 
@@ -97,7 +98,8 @@ class RegisterPage extends React.Component {
     {
       method: 'POST',
       body: JSON.stringify(nuevoEmpleado), headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
       }
     };
     fetch('http://localhost:8080/admin/empleados', myInit)
@@ -125,12 +127,17 @@ class RegisterPage extends React.Component {
     );
   }
   componentWillMount() {
-
+    validarToken().then(rol=>{
+      console.log(rol);
+      if(rol=="ROLE_ADMIN")
+      {
+        this.setState({autorizado: true})
+      }
+    })
     fetch('http://localhost:8080/generos').then(response => {
       return response.json();
     }).then(generos => {
       this.setState({ generos: generos });
-      console.log(this.state.generos);
     });
 
     fetch('http://localhost:8080/tiposdocumento').then(response => {
@@ -139,8 +146,13 @@ class RegisterPage extends React.Component {
       this.setState({ tiposdocumento: tipos });
       console.log(this.state.tiposdocumento);
     });
-
-    fetch('http://localhost:8080/admin/tiposempleado').then(response => {
+    var myInit =
+    {
+       method: 'GET',headers: {
+        'Authorization': localStorage.getItem('token')
+      }
+    };
+    fetch('http://localhost:8080/admin/tiposempleado',myInit).then(response => {
       return response.json();
     }).then(tiposempleado => {
       this.setState({ tiposempleado: tiposempleado });
@@ -151,6 +163,12 @@ class RegisterPage extends React.Component {
   }
   render() {
     const { classes, ...rest } = this.props;
+    if(!this.state.autorizado)
+    {
+      return(
+        <div>No autorizado</div>
+      );
+    }
     return (
       <div>
         <Header
@@ -287,7 +305,7 @@ class RegisterPage extends React.Component {
                             select
                             label="Tipo Empleado"
                             className={classes.textField}
-                            name="id"
+                            name="idTipo"
                             margin="normal"
                             value={this.state.idTipo}
                             onChange={this.onChange}
@@ -296,7 +314,7 @@ class RegisterPage extends React.Component {
                                 className: classes.menu,
                               },
                             }}
-                            input={<Input name="tipoempleado" id="id" />}
+                            input={<Input name="tipoempleado" id="idTipo" />}
                             >
                             {
                               this.state.tiposempleado.map((tipoempleado) => (
@@ -377,7 +395,6 @@ class RegisterPage extends React.Component {
                     <CardFooter className={classes.cardFooter}>
                       <Button
                         type="submit"
-                        {console.log("ASDASDA")}
                         simple color="primary" size="lg">
                         Registrarse
                       </Button>
@@ -387,7 +404,6 @@ class RegisterPage extends React.Component {
               </GridItem>
             </GridContainer>
           </div>
-          <Footer whiteFont />
         </div>
       </div>
     );

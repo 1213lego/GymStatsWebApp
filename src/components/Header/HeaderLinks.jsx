@@ -132,7 +132,7 @@ function MenuAdmin(props) {
             }}
             buttonIcon={Apps}
             dropdownList={[
-              <Link to="/" className={props.classes.dropdownLink}>
+              <Link to="/registerEmployer" className={props.classes.dropdownLink}>
                 All components
             </Link>,
               <a
