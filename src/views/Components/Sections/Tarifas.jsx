@@ -40,7 +40,7 @@ class Tarifas extends React.Component {
         <GridContainer justify="center" alignItems="center">
 
             {tarifas.map(tarifa => (
-              <GridItem xs={12} sm={4} md={4} lg={2}>
+              <GridItem xs={14} sm={4} md={4} lg={2}>
               <TarifaCard
                 key={tarifa.id}
                 nombre={tarifa.nombreTarifa}

@@ -15,6 +15,7 @@ import Drawer from "@material-ui/core/Drawer";
 import Menu from "@material-ui/icons/Menu";
 // core components
 import headerStyle from "assets/jss/material-kit-react/components/headerStyle.jsx";
+import { validarToken } from "../..";
 
 class Header extends React.Component {
   constructor(props) {
@@ -24,6 +25,9 @@ class Header extends React.Component {
     };
     this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
     this.headerColorChange = this.headerColorChange.bind(this);
+  }
+  async componentWillMount(){
+    await validarToken();
   }
   handleDrawerToggle() {
     this.setState({ mobileOpen: !this.state.mobileOpen });

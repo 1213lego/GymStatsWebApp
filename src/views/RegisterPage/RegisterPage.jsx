@@ -68,6 +68,7 @@ class RegisterPage extends React.Component {
   }
   onSubmit(e) {
     e.preventDefault();
+    console.log("SDSdds");
     const nuevoCliente = {
       documento: this.state.documento,
       apellidos: this.state.apellidos,
@@ -344,12 +345,10 @@ class RegisterPage extends React.Component {
               </GridItem>
             </GridContainer>
           </div>
-          <Footer whiteFont />
         </div>
       </div>
     );
   }
-
 }
 
 export default withStyles(registerPageStyle)(RegisterPage);
