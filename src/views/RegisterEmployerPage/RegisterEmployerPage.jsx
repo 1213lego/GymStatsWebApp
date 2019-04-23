@@ -50,6 +50,7 @@ class RegisterPage extends React.Component {
       cardAnimaton: "cardHidden",
       generos: [],
       tiposdocumento: [],
+      tiposempleado: [],
       documento: '',
       apellidos: '',
       email: '',
@@ -57,7 +58,9 @@ class RegisterPage extends React.Component {
       username: '',
       password: '',
       id: null, //idgenero
-      tipodocumento: null
+      tipodocumento: null,
+      idTipo: null,
+      tipoUsuario:''
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -68,12 +71,20 @@ class RegisterPage extends React.Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    console.log("SDSdds");
-    const nuevoCliente = {
+    const nuevoEmpleado = {
       documento: this.state.documento,
       apellidos: this.state.apellidos,
       email: this.state.email,
       nombres: this.state.nombres,
+      empleado:
+      {
+        tipoEmpleado:{
+          idTipo:this.state.idTipoEmpleado,
+          tipoUsuario: this.state.tipoUsuario 
+
+        }
+      },
+
       autenticacionUsuarios: {
         username: this.state.username,
         password: this.state.password
@@ -81,15 +92,15 @@ class RegisterPage extends React.Component {
       genero: { id: this.state.id }, //idgenero
       tipoDocumento: { tipodocumento: this.state.tipodocumento }
     };
-    console.log(nuevoCliente);
+    console.log(nuevoEmpleado);
     var myInit =
     {
       method: 'POST',
-      body: JSON.stringify(nuevoCliente), headers: {
+      body: JSON.stringify(nuevoEmpleado), headers: {
         'Content-Type': 'application/json'
       }
     };
-    fetch('http://localhost:8080/signup', myInit)
+    fetch('http://localhost:8080/admin/empleados', myInit)
       .then(response => {
         if(response.status==201)
         {
@@ -127,6 +138,13 @@ class RegisterPage extends React.Component {
     }).then(tipos => {
       this.setState({ tiposdocumento: tipos });
       console.log(this.state.tiposdocumento);
+    });
+
+    fetch('http://localhost:8080/admin/tiposempleado').then(response => {
+      return response.json();
+    }).then(tiposempleado => {
+      this.setState({ tiposempleado: tiposempleado });
+      console.log(this.state.tiposempleado);
     });
 
 
@@ -263,8 +281,30 @@ class RegisterPage extends React.Component {
                             <MenuItem value={genero.id}>{genero.genero}</MenuItem>
                           ))
                         }
-                            <MenuItem value={10}>NO IDENTIFICADO</MenuItem>
                         </TextField>
+                        <TextField
+                            id="tipoEmpleadoSpinner"
+                            select
+                            label="Tipo Empleado"
+                            className={classes.textField}
+                            name="id"
+                            margin="normal"
+                            value={this.state.idTipo}
+                            onChange={this.onChange}
+                            SelectProps={{
+                              MenuProps: {
+                                className: classes.menu,
+                              },
+                            }}
+                            input={<Input name="tipoempleado" id="id" />}
+                            >
+                            {
+                              this.state.tiposempleado.map((tipoempleado) => (
+
+                                <MenuItem value={tipoempleado.idTipo}>{tipoempleado.tipoUsuario}</MenuItem>
+                              ))
+                            }
+                            </TextField>
 
                     <br/>
                       <TextField
@@ -337,7 +377,7 @@ class RegisterPage extends React.Component {
                     <CardFooter className={classes.cardFooter}>
                       <Button
                         type="submit"
-
+                        {console.log("ASDASDA")}
                         simple color="primary" size="lg">
                         Registrarse
                       </Button>
@@ -347,10 +387,12 @@ class RegisterPage extends React.Component {
               </GridItem>
             </GridContainer>
           </div>
+          <Footer whiteFont />
         </div>
       </div>
     );
   }
+
 }
 
 export default withStyles(registerPageStyle)(RegisterPage);
