@@ -29,6 +29,7 @@ import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.
 import image from "assets/img/bg2gym.jpg";
 import { TextField, FormControl, Input } from "@material-ui/core";
 import { validarToken } from "../..";
+import { Redirect } from 'react-router-dom' 
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -165,9 +166,7 @@ class RegisterPage extends React.Component {
     const { classes, ...rest } = this.props;
     if(!this.state.autorizado)
     {
-      return(
-        <div>No autorizado</div>
-      );
+      return <Redirect to='/login-page' />;
     }
     return (
       <div>

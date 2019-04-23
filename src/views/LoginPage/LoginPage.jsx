@@ -18,7 +18,7 @@ import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
-
+import { Redirect } from 'react-router-dom' 
 import loginPageStyle from "assets/jss/material-kit-react/views/loginPage.jsx";
 
 import image from "assets/img/bggym.jpg";
@@ -74,6 +74,8 @@ async onSubmit(e) {
         console.log(localStorage.getItem("token"));
         console.log(localStorage.getItem("jwtresponse"));
         this.setState({autentico: true})
+        alert("Inicio de sesion exitoso");
+        this.props.history.push('/');
       }
       else
       {
