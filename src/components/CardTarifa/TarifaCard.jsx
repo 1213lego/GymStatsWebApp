@@ -14,7 +14,7 @@ class TarifaCard extends React.Component
     return(
      <Card pricing color="primary"
       style={{
-          marginTop:"2px",
+          marginTop:"20px",
           position : "relative",
           maxWidth: "235px"
        }}>

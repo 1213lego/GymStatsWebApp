@@ -28,7 +28,7 @@ import CardFooter from "components/Card/CardFooter.jsx";
 import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.jsx";
 import image from "assets/img/bg2gym.jpg";
 import { TextField, FormControl, Input } from "@material-ui/core";
-import { validarToken } from "../..";
+import { validarToken } from "../../index.js";
 import { Redirect } from 'react-router-dom' 
 const styles = theme => ({
   root: {
@@ -132,9 +132,9 @@ class RegisterPage extends React.Component {
       console.log(rol);
       if(rol=="ROLE_ADMIN")
       {
-        this.setState({autorizado: true})
+        this.setState({autorizado: true});
       }
-    })
+    });
     fetch('http://localhost:8080/generos').then(response => {
       return response.json();
     }).then(generos => {
@@ -164,9 +164,9 @@ class RegisterPage extends React.Component {
   }
   render() {
     const { classes, ...rest } = this.props;
-    if(!this.state.autorizado)
+    if(this.state.autorizado==false)
     {
-      return <Redirect to='/login-page' />;
+      return <p>No autorizado</p>
     }
     return (
       <div>

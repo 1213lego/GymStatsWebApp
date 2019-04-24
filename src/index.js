@@ -13,7 +13,6 @@ import LoginPage from "views/LoginPage/LoginPage.jsx";
 import RegisterPage from "views/RegisterPage/RegisterPage.jsx";
 import RegisterEmployerPage from "views/RegisterEmployerPage/RegisterEmployerPage.jsx"
 var hist = createBrowserHistory();
-
 ReactDOM.render(
   <Router history={hist}>
     <Switch>

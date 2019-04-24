@@ -18,7 +18,7 @@ class Tarifas extends React.Component {
   {
     try
     {
-      let response = await fetch("http://localhost:8080/tarifas");
+      let response = await fetch("http://192.168.0.115:8080/tarifas");
       let data = await response.json();
       this.setState({ tarifas: data });
       console.log(data);

@@ -75,7 +75,6 @@ async onSubmit(e) {
         console.log(localStorage.getItem("jwtresponse"));
         this.setState({autentico: true})
         alert("Inicio de sesion exitoso");
-        this.props.history.push('/');
       }
       else
       {
@@ -90,7 +89,7 @@ async onSubmit(e) {
       console.log(e);
       this.setState({errores: e.message})
     }
-    console.log(await validarToken())
+    console.log(await validarToken());
   }
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
