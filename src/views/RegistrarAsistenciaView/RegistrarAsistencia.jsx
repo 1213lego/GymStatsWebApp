@@ -20,7 +20,7 @@ import CardFooter from "components/Card/CardFooter.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import { Redirect } from 'react-router-dom'
 import loginPageStyle from "assets/jss/material-kit-react/views/loginPage.jsx";
-
+import RDialog from "components/FormDialog/Dialogs/RegistrarAsistenciaDialog.jsx"
 import image from "assets/img/bggym.jpg";
 import { TextField } from "@material-ui/core";
 
@@ -204,13 +204,7 @@ async onSubmit(e) {
                   }
                 </CardBody>
                 <CardFooter className={classes.cardFooter}>
-                  <Button
-                    type="submit"
-                    simple
-                    color="primary"
-                    size="lg">
-                    Registrar Asistencia
-                  </Button>
+                  <RDialog/>
                 </CardFooter>
               </form>
             </Card>
