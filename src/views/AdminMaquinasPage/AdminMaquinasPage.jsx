@@ -14,8 +14,8 @@ import GridItem from "components/Grid/GridItem.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
-import CrearTarifa from "components/FormDialog/crearTarifa.jsx";
-import Tarifa from "views/Components/Sections/Tarifas.jsx";
+import AñadirMaquina from "components/FormDialog/añadirMaquina.jsx";
+
 import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.jsx";
 
 // Sections for this page
@@ -40,12 +40,12 @@ class AdminTarifasPage extends React.Component {
           }}
           {...rest}
         />
-        <Parallax filter image={require("assets/img/tarifaimage.jpg")}>
+        <Parallax filter image={require("assets/img/maquinaimage.jpg")}>
           <div className={classes.container}>
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
 
-                <h1>Modulo Agregar Tarifas</h1>
+                <h1>Modulo Añadir Maquinas</h1>
 
                 <br />
 
@@ -56,9 +56,9 @@ class AdminTarifasPage extends React.Component {
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
             <div style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
-            <CrearTarifa/>
+            <AñadirMaquina/>
             </div>
-            <Tarifa/>
+            {/*TODO LISTAR MAQUINAS EN UN TABLE PREFERIBLEMENTE*/}
           </div>
         </div>
   </div>

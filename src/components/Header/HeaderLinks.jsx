@@ -130,6 +130,9 @@ function MenuAdmin(props) {
             <Link to="/admin/tarifas" className={props.classes.dropdownLink}>
             Agregar Tarifa
             </Link>,
+            <Link to="/admin/maquinas" className={props.classes.dropdownLink}>
+            Agregar Maquina
+            </Link>,
           <a
             href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
             target="_blank"

@@ -13,11 +13,13 @@ import LoginPage from "views/LoginPage/LoginPage.jsx";
 import RegisterPage from "views/RegisterPage/RegisterPage.jsx";
 import RegisterEmployerPage from "views/RegisterEmployerPage/RegisterEmployerPage.jsx"
 import AdminTarifasPage from "views/AdminTarifasPage/AdminTarifasPage.jsx"
+import AdminMaquinasPage from "views/AdminMaquinasPage/AdminMaquinasPage.jsx"
 var hist = createBrowserHistory();
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
       <Route path="/admin/tarifas" component={AdminTarifasPage}/>
+      <Route path="/admin/maquinas" component={AdminMaquinasPage}/>
       <Route path="/landing-page" component={LandingPage} />
       <Route path="/profile-page" component={ProfilePage} />
       <Route path="/registerEmployer" component={RegisterEmployerPage} />
