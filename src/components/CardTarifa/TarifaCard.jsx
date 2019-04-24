@@ -18,13 +18,16 @@ class TarifaCard extends React.Component
           position : "relative",
           maxWidth: "235px"
        }}>
-       <CardHeader color="primary" >
-       {this.props.nombre}
+       <CardHeader color="primary">
+          <h4>{this.props.nombre}</h4>
         </CardHeader>
            <CardBody pricing>
              <h3>
               ${this.props.precio}
              </h3>
+             <h4>
+             Duracion: {this.props.duracion} dias
+             </h4>
 
              <Button round color="white">
                Comprar

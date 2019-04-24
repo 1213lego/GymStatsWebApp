@@ -45,12 +45,10 @@ class Tarifas extends React.Component {
                 key={tarifa.id}
                 nombre={tarifa.nombreTarifa}
                 precio={tarifa.precio}
+                duracion={tarifa.duracionDias}
               />
               </GridItem>
             ))}
-
-
-
         </GridContainer>
         </div>
       </div>
