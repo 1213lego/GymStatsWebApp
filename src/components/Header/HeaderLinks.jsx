@@ -43,7 +43,7 @@ class HeaderLinks extends React.Component {
         {
           pTipo == "ROLE_ADMIN" ? <MenuAdmin classes={classes}></MenuAdmin> :
             pTipo == "ROLE_CLIENTE" ? <MenuCliente classes={classes}></MenuCliente> : pTipo == "ROLE_EMPLEADO" ?
-              <MenuEmpleado classes={classes}></MenuEmpleado> : <p></p>
+              <MenuEmpleado classes={classes}></MenuEmpleado> : <ListItem className={classes.listItem}> </ListItem>
         }
         <ListItem className={classes.listItem}>
           <Link to="/register-page" className={classes.navLink}>
@@ -126,6 +126,9 @@ function MenuAdmin(props) {
         dropdownList={[
           <Link to="/registerEmployer" className={props.classes.dropdownLink}>
             Registrar Empleado
+            </Link>,
+            <Link to="/admin/tarifas" className={props.classes.dropdownLink}>
+            Agregar Tarifa
             </Link>,
           <a
             href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
