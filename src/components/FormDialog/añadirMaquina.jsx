@@ -57,7 +57,7 @@ class FormDialog extends React.Component {
   }
   componentWillMount()
   {
-    fetch('http://localhost:8080/maquinas').then(response =>{
+    fetch('http://localhost:8080/estadosmaquina').then(response =>{
       return response.json();
     }).then(estadosMaquinas => {
       this.setState({estadosMaquinas:estadosMaquinas});
@@ -89,8 +89,9 @@ class FormDialog extends React.Component {
         }
 
     };
-    fetch('http://localhost:8080/maquinas', myInit)
+    fetch('http://localhost:8080/admin/maquinas', myInit)
     .then(response => {
+      console.log(response);
       if(response.status==201)
       {
         alert("Se ha registrado satisfatoriamente la maquina");
@@ -99,7 +100,7 @@ class FormDialog extends React.Component {
         alert("Ha fallado el registro");
       }
       return response.json();
-    });
+    }).then(data=>{console.log(data)});
 
   }
 
@@ -163,7 +164,7 @@ class FormDialog extends React.Component {
             <TextField
               id="tipoEstadosMaquinaSpinner"
               select
-                name="estadosMaquinas"
+                name="idEstadoMaquina"
                 label="Estado de la Maquina"
                 margin="dense"
                 className={classes.textField}
@@ -189,7 +190,7 @@ class FormDialog extends React.Component {
               label="Fecha Compra"
               type="date"
               defaultValue={this.todayDate}
-
+              onChange={this.onChange}
               InputLabelProps={{
                 shrink: true,
               }}
