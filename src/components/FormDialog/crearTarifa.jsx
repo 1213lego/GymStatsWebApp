@@ -72,9 +72,11 @@ export default class FormDialog extends React.Component {
   render() {
     return (
       <Fragment>
-      <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-          Agregar Tarifa
+      <div style={{marginTop:"40px"}}>
+      <Button variant="raised" color="#d39539" onClick={this.handleClickOpen}>
+          <h4>Agregar Tarifa</h4>
         </Button>
+        </div>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
