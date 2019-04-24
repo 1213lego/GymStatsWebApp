@@ -12,7 +12,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Add from '@material-ui/icons/Add'
 import {Redirect} from 'react-router-dom'
 import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.jsx";
-
+import {withRouter} from 'react-router-dom';
 
 const styles = theme => ({
   container: {
@@ -30,14 +30,20 @@ const styles = theme => ({
 
 class RegistrarAsistenciaDialog extends React.Component {
 
-
+  constructor(props)
+  {
+    super(props);
+    this.state={
+      open: false
+    }
+  }
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
   handleClose = () => {
     this.setState({ open: false });
-    <Redirect to='/registrarAsistencia'/>
+    window.location.reload();
   };
 
   render() {

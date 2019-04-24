@@ -20,7 +20,7 @@ import CardFooter from "components/Card/CardFooter.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import { Redirect } from 'react-router-dom'
 import loginPageStyle from "assets/jss/material-kit-react/views/loginPage.jsx";
-import RDialog from "components/FormDialog/Dialogs/RegistrarAsistenciaDialog.jsx"
+import RDialog from "components/FormDialog/Dialogs/registrarAsistenciaDialog.jsx"
 import image from "assets/img/bggym.jpg";
 import { TextField } from "@material-ui/core";
 
@@ -64,11 +64,8 @@ async onSubmit(e) {
       let response = await fetch('http://localhost:8080/asistencias', myInit);
       if (response.status == 200)
       {
-        let data= await response.json();
-        var usuario=data.usuario;
         console.log("Autentico");
-        this.setState({autentico: true})
-        alert("Inicio de sesion exitoso");
+        this.setState({errores:'Has Ingresado correctamente, bienvenido' })
       }
       else if(response.status==403)
       {
@@ -79,6 +76,10 @@ async onSubmit(e) {
         console.log("no autentico");
         this.setState({ errores: 'No tienes una subscripcion/o ha caducado' });
       }
+      else if(response.status==404)
+      {
+        this.setState({errores:'El usuario que has ingresado no existe'});
+      }
       console.log(response);
     }
     catch (e)
@@ -87,7 +88,6 @@ async onSubmit(e) {
       console.log(e);
       this.setState({errores: e.message})
     }
-    console.log(await validarToken());
   }
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
@@ -204,7 +204,7 @@ async onSubmit(e) {
                   }
                 </CardBody>
                 <CardFooter className={classes.cardFooter}>
-                  <RDialog/>
+                  <RDialog mensaje ={errores}/>
                 </CardFooter>
               </form>
             </Card>
@@ -213,9 +213,8 @@ async onSubmit(e) {
       </div>
       <Footer whiteFont />
   </div>
-</div>
 );
 }
 }
 
-export default withStyles(loginPageStyle)(LoginPage);
+export default withStyles(loginPageStyle)(RegistrarAsistenciaPage);

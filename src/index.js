@@ -14,12 +14,12 @@ import RegisterPage from "views/RegisterPage/RegisterPage.jsx";
 import RegisterEmployerPage from "views/RegisterEmployerPage/RegisterEmployerPage.jsx";
 import AdminTarifasPage from "views/AdminTarifasPage/AdminTarifasPage.jsx";
 import AdminMaquinasPage from "views/AdminMaquinasPage/AdminMaquinasPage.jsx";
-import RegistrarAsitenciaPage from "vies/RegistrarAsitenciaPage/RegistrarAsitenciaPage.jsx";
+import RegistrarAsistenciaPage from "./views/RegistrarAsistenciaPage/RegistrarAsistenciaPage";
 var hist = createBrowserHistory();
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
-      <Route path="/registrarAsistencia" component={RegistrarAsitenciaPage}/>
+      <Route path="/registrarAsistencia" component={RegistrarAsistenciaPage}/>
       <Route path="/admin/tarifas" component={AdminTarifasPage}/>
       <Route path="/admin/maquinas" component={AdminMaquinasPage}/>
       <Route path="/landing-page" component={LandingPage} />
