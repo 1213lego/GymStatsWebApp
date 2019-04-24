@@ -44,12 +44,12 @@ class AdminTarifasPage extends React.Component {
           <div className={classes.container}>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={6}>
-                <div className={classNames(classes.main, classes.mainRaised)}>
-                  <div className={classes.container}>
-                    <Tarifa/>
-                    <CrearTarifa/>
-                  </div>
+              <div className={classNames(classes.main, classes.mainRaised)}>
+                <div className={classes.container}>
+                  <Tarifa/>
+                  <CrearTarifa/>
                 </div>
+              </div>
 
                 <br />
 
