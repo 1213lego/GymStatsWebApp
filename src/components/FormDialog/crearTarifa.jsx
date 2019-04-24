@@ -38,6 +38,7 @@ export default class FormDialog extends React.Component {
       precio: this.state.precio,
       duracionDias: this.state.duracionDias
     };
+    console.log(nuevaTarifa);
     var myInit =
     {
         method: 'POST',
@@ -93,25 +94,28 @@ export default class FormDialog extends React.Component {
               autoFocus
               color="#d39539"
               margin="dense"
-              id="nombreTarifa"
+              name="nombreTarifa"
               label="Nombre"
               type="text"
+              onChange={this.onChange}
               fullWidth
             />
             <TextField
               autoFocus
               margin="dense"
-              id="precio"
+              name="precio"
               label="Precio"
               type="number"
+              onChange={this.onChange}
               fullWidth
             />
             <TextField
               autoFocus
               margin="dense"
-              id="duracionDias"
+              name="duracionDias"
               label="Duracion en dias"
               type="number"
+              onChange={this.onChange}
               fullWidth
             />
 
