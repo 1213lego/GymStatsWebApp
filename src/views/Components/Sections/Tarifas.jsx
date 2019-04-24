@@ -49,6 +49,36 @@ class Tarifas extends React.Component {
               />
               </GridItem>
             ))}
+            <TarifaCard
+              key="1"
+              nombre="aa"
+              precio="123"
+              duracion="12"
+            />
+            <TarifaCard
+              key="1"
+              nombre="aa"
+              precio="123"
+              duracion="12"
+            />
+            <TarifaCard
+              key="1"
+              nombre="aa"
+              precio="123"
+              duracion="12"
+            />
+            <TarifaCard
+              key="1"
+              nombre="aa"
+              precio="123"
+              duracion="12"
+            />
+            <TarifaCard
+              key="1"
+              nombre="aa"
+              precio="123"
+              duracion="12"
+            />
         </GridContainer>
         </div>
       </div>
