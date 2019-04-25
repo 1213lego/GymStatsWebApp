@@ -70,7 +70,6 @@ class FormDialog extends React.Component {
   onSubmit(e){
     e.preventDefault();
     const nuevaMaquina = {
-
       nombre: this.state.nombre,
       marca: this.state.marca,
       fechaCompra: this.state.fechaCompra,

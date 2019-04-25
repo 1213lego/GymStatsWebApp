@@ -64,8 +64,11 @@ async onSubmit(e) {
       let response = await fetch('http://localhost:8080/asistencias', myInit);
       if (response.status == 200)
       {
-        console.log("Autentico");
         this.setState({errores:'Has Ingresado correctamente, bienvenido' })
+      }
+      else if(response.status==201)
+      {
+        this.setState({errores:'Gracias por asistir' })
       }
       else if(response.status==403)
       {
