@@ -52,9 +52,13 @@ async onSubmit(e) {
     {
       cliente: {
         documento:this.state.documento
-      }
+      },
+      tarifa: {
+        idTarifa: this.state.idTarifa
+    }
 
     };
+    console.log(registrarSubscripcioon);
     var myInit =
     {
       method: 'POST',
@@ -67,7 +71,7 @@ async onSubmit(e) {
     };
     try
     {
-      let response = await fetch('http://localhost:8080/suscripciones', myInit);
+      let response = await fetch('http://localhost:8080/empleados/suscripciones', myInit);
       if (response.status == 200)
       {
         this.setState({errores:'Se ha registrado la subscripcion con exito a :' + this.state.documento })
@@ -136,7 +140,7 @@ async onSubmit(e) {
                     <CardHeader
                       color="primary"
                       className={classes.cardHeader}>
-                      <h4>Registro rutina diaria</h4>
+                      <h4>Registro de suscripcion</h4>
                     <div className={classes.socialLine}>
                       <Button
                         justIcon
@@ -182,7 +186,7 @@ async onSubmit(e) {
                         fullWidth: true
                       }}
                       inputProps={{
-                        type: "text",
+                        type: "number",
                         endAdornment: (
                           <InputAdornment position="end">
                             <People className={classes.inputIconsColor} />
@@ -190,6 +194,7 @@ async onSubmit(e) {
                       )
                     }}
                     onChange={this.onChange}
+                    type="number"
                   />
                   </div>
 
@@ -208,12 +213,12 @@ async onSubmit(e) {
                           className: classes.menu,
                         },
                       }}
-                      input={<Input name="tipoempleado" id="idTipo" />}
+                      input={<Input name="idTarifa" id="idTarifa" />}
                       >
                       {
                         this.state.tarifas.map((tarifa) => (
 
-                          <MenuItem value={tarifa.id}>{tarifa.nombreTarifa}</MenuItem>
+                          <MenuItem value={tarifa.idTarifa}>{tarifa.nombreTarifa}</MenuItem>
                         ))
                       }
 

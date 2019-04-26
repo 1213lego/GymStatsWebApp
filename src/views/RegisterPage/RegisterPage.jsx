@@ -68,7 +68,6 @@ class RegisterPage extends React.Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    console.log("SDSdds");
     const nuevoCliente = {
       documento: this.state.documento,
       apellidos: this.state.apellidos,

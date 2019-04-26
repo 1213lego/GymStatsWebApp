@@ -47,10 +47,7 @@ async onSubmit(e) {
     e.preventDefault();
     const registrarSubscripcioon =
     {
-      cliente: {
-        documento:this.state.documento
-      }
-
+      documento: this.state.documento
     };
     var myInit =
     {
@@ -64,7 +61,8 @@ async onSubmit(e) {
     };
     try
     {
-      let response = await fetch('http://localhost:8080/suscripciondiaria', myInit);
+      let response = await fetch('http://localhost:8080/empleados/suscripciondiaria', myInit);
+      console.log(response);
       if (response.status == 200)
       {
         this.setState({errores:'Se ha registrado la subscripcion diaria a :' + this.state.documento })
@@ -77,7 +75,6 @@ async onSubmit(e) {
       {
         this.setState({errores:'La cedula del cliente que has ingresado no se ha registrado'});
       }
-      console.log(response);
     }
     catch (e)
     {
@@ -157,21 +154,16 @@ async onSubmit(e) {
                     <TextField
                       value={this.state.documento}
                       name="documento"
-
                       id="documento"
                       label="Cedula del Cliente"
+                      onChange={this.onChange}
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        type: "text",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
-                        </InputAdornment>
-                      )
+                        type: "number"
                     }}
-                    onChange={this.onChange}
+                    type="number"
                   />
                   </div>
 
@@ -182,7 +174,7 @@ async onSubmit(e) {
                   }
                 </CardBody>
                 <CardFooter className={classes.cardFooter}>
-                  <RDialog nombreBtn="Registrar Subscripcion"mensaje ={errores}/>
+                  <RDialog nombreBtn="Registrar Subscripcion" mensaje ={errores}/>
                 </CardFooter>
               </form>
             </Card>
