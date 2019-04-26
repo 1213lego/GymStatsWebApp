@@ -15,10 +15,14 @@ import RegisterEmployerPage from "views/RegisterEmployerPage/RegisterEmployerPag
 import AdminTarifasPage from "views/AdminTarifasPage/AdminTarifasPage.jsx";
 import AdminMaquinasPage from "views/AdminMaquinasPage/AdminMaquinasPage.jsx";
 import RegistrarAsistenciaPage from "./views/RegistrarAsistenciaPage/RegistrarAsistenciaPage";
+import RegistrarSubDiaria from "views/RegistrarSubscripcionDiariaPage/RegistrarSubscripcionDiariaPage.jsx";
+import RegistrarSub from "views/RegistrarSubscripcionPage/RegistrarSubscripcion.jsx";
 var hist = createBrowserHistory();
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
+      <Route path="/empleado/registroSubs" component={RegistrarSub}/>
+      <Route path="/empleado/registroDiario" component={RegistrarSubDiaria}/>
       <Route path="/registrarAsistencia" component={RegistrarAsistenciaPage}/>
       <Route path="/admin/tarifas" component={AdminTarifasPage}/>
       <Route path="/admin/maquinas" component={AdminMaquinasPage}/>

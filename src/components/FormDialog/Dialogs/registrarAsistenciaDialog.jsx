@@ -52,7 +52,7 @@ class RegistrarAsistenciaDialog extends React.Component {
       <Fragment>
       <div style={{justifyContent:'center',display:'flex',alignItems:'center',marginTop:"40px"}}>
       <Button type ="submit" variant="raised" color="#d39539" onClick={this.handleClickOpen}>
-          <h4>Ingresar</h4>
+          <h4>{this.props.nombreBtn}</h4>
         </Button>
         </div>
         <Dialog

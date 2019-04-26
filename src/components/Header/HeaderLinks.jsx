@@ -157,9 +157,12 @@ function MenuEmpleado(props) {
         }}
         buttonIcon={Apps}
         dropdownList={[
-          <Link to="/" className={props.classes.dropdownLink}>
-            --
+          <Link to="/empleado/registroDiario" className={props.classes.dropdownLink}>
+            Registrar Sub. Diaria
             </Link>,
+            <Link to="/empleado/registroSubs" className={props.classes.dropdownLink}>
+              Registrar Subscripción
+              </Link>,
           <a
             href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
             target="_blank"

@@ -19,21 +19,24 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import { Redirect } from 'react-router-dom'
-import loginPageStyle from "assets/jss/material-kit-react/views/loginPage.jsx";
+import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.jsx";
 import RDialog from "components/FormDialog/Dialogs/registrarAsistenciaDialog.jsx"
 import image from "assets/img/bggym.jpg";
-import { TextField } from "@material-ui/core";
+import { validarToken } from "../../index.js";
+import { TextField,MenuItem,Input } from "@material-ui/core";
 
 
-class RegistrarAsistenciaPage extends React.Component {
+
+class RegistrarSubscripcion extends React.Component {
   constructor(props) {
     super(props);
     // we use this to make the card to appear after the page has been rendered
     this.state = {
       cardAnimaton: "cardHidden",
-      username: '',
-      password: '',
-      autentico: false,
+      tarifas: [],
+      documento: null,
+      idTarifa: null,
+
       errores: ''
     };
     this.onChange = this.onChange.bind(this);
@@ -45,43 +48,37 @@ class RegistrarAsistenciaPage extends React.Component {
 
 async onSubmit(e) {
     e.preventDefault();
-    const registrarAsistencia =
+    const registrarSubscripcioon =
     {
-      username: this.state.username,
-      password: this.state.password
+      cliente: {
+        documento:this.state.documento
+      }
+
     };
     var myInit =
     {
       method: 'POST',
-      body: JSON.stringify(registrarAsistencia),
+      body: JSON.stringify(registrarSubscripcioon),
       headers:
       {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
       }
     };
     try
     {
-      let response = await fetch('http://localhost:8080/asistencias', myInit);
+      let response = await fetch('http://localhost:8080/suscripciones', myInit);
       if (response.status == 200)
       {
-        this.setState({errores:'Has Ingresado correctamente, bienvenido' })
+        this.setState({errores:'Se ha registrado la subscripcion con exito a :' + this.state.documento })
       }
       else if(response.status==201)
       {
         this.setState({errores:'Gracias por asistir' })
       }
-      else if(response.status==403)
-      {
-        this.setState({ errores: ' Usuario o contraseña invalida'});
-      }
-      else if(response.status ==402)
-      {
-        console.log("no autentico");
-        this.setState({ errores: 'No tienes una subscripcion/o ha caducado' });
-      }
       else if(response.status==404)
       {
-        this.setState({errores:'El usuario que has ingresado no existe'});
+        this.setState({errores:'La cedula del cliente que has ingresado no se ha registrado'});
       }
       console.log(response);
     }
@@ -100,6 +97,21 @@ async onSubmit(e) {
       }.bind(this),
       700
     );
+  }
+
+  async  componentWillMount()
+  {
+    try
+    {
+      let response = await fetch("http://localhost:8080/tarifas");
+      let data = await response.json();
+      this.setState({ tarifas: data });
+      console.log(data);
+    }
+    catch (e)
+    {
+      console.log("error " + e.message);
+    }
   }
   render() {
     const errores = this.state.errores;
@@ -124,7 +136,7 @@ async onSubmit(e) {
                     <CardHeader
                       color="primary"
                       className={classes.cardHeader}>
-                      <h4>Login Asistencia</h4>
+                      <h4>Registro rutina diaria</h4>
                     <div className={classes.socialLine}>
                       <Button
                         justIcon
@@ -156,16 +168,16 @@ async onSubmit(e) {
                     </div>
                   </CardHeader>
                   <p className={classes.divider}>
-                    Ingresa ahora y empieza a construir tu futuro
+                    Ingrese la cedula del cliente para registrar una subscripcion
                   </p>
                   <CardBody>
-                  <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+                  <div style={{display:"flex",justifyContent:"center"}}>
                     <TextField
-                      value={this.state.username}
-                      name="username"
-                      labelText="Nombre de Usuario..."
-                      id="username"
-                      label="Nombre de Usuario"
+                      value={this.state.documento}
+                      name="documento"
+
+                      id="documento"
+                      label="Cedula del Cliente"
                       formControlProps={{
                         fullWidth: true
                       }}
@@ -180,30 +192,35 @@ async onSubmit(e) {
                     onChange={this.onChange}
                   />
                   </div>
-                  <br/>
-                    <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+
+                  <div style={{display:"flex",justifyContent:"center"}}>
                   <TextField
-                    name="password"
-                    value={this.state.password}
-                    label="Contraseña"
-                    labelText="Password..."
-                    id="pass"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      type: "password",
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Icon className={classes.inputIconsColor}>
-                            lock_outline
-                          </Icon>
-                        </InputAdornment>
-                      )
-                    }}
-                    onChange={this.onChange}
-                  />
+                      id="idTarifaSpinner"
+                      select
+                      label="Tipo de subscripcion"
+                      className={classes.textField}
+                      name="idTarifa"
+                      margin="normal"
+                      value={this.state.idTarifa}
+                      onChange={this.onChange}
+                      SelectProps={{
+                        MenuProps: {
+                          className: classes.menu,
+                        },
+                      }}
+                      input={<Input name="tipoempleado" id="idTipo" />}
+                      >
+                      {
+                        this.state.tarifas.map((tarifa) => (
+
+                          <MenuItem value={tarifa.id}>{tarifa.nombreTarifa}</MenuItem>
+                        ))
+                      }
+
+                      </TextField>
                   </div>
+
+
                   {
                     <p className={classes.divider}>
                       {errores}
@@ -211,7 +228,7 @@ async onSubmit(e) {
                   }
                 </CardBody>
                 <CardFooter className={classes.cardFooter}>
-                  <RDialog nombreBtn="Ingresar" mensaje ={errores}/>
+                  <RDialog nombreBtn="Registrar Subscripcion"mensaje ={errores}/>
                 </CardFooter>
               </form>
             </Card>
@@ -224,4 +241,4 @@ async onSubmit(e) {
 }
 }
 
-export default withStyles(loginPageStyle)(RegistrarAsistenciaPage);
+export default withStyles(registerPageStyle)(RegistrarSubscripcion);
