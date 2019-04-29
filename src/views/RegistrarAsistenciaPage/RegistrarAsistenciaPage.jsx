@@ -4,11 +4,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
-import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 // core components
-import Header from "components/Header/Header.jsx";
-import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
@@ -17,12 +14,11 @@ import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
-import { Redirect } from 'react-router-dom'
 import loginPageStyle from "assets/jss/material-kit-react/views/loginPage.jsx";
 import RDialog from "components/FormDialog/Dialogs/registrarAsistenciaDialog.jsx"
 import image from "assets/img/bggym.jpg";
 import { TextField } from "@material-ui/core";
+import { BASE_URL } from "../..";
 
 
 class RegistrarAsistenciaPage extends React.Component {
@@ -61,7 +57,7 @@ async onSubmit(e) {
     };
     try
     {
-      let response = await fetch('http://localhost:8080/asistencias', myInit);
+      let response = await fetch(BASE_URL + "/asistencias", myInit);
       if (response.status == 200)
       {
         this.setState({errores:'Has Ingresado correctamente, bienvenido' })

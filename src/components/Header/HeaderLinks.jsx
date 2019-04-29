@@ -25,7 +25,8 @@ class HeaderLinks extends React.Component {
       rol: ''
     }
   }
-  async componentWillMount() {
+  async componentWillMount() 
+  {
     console.log("de headerlink" + await validarToken())
     this.setState({ rol: tipoUsuario });
   }

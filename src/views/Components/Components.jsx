@@ -12,30 +12,10 @@ import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
-import Button from "components/CustomButtons/Button.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
-// sections for this page
-import Card from "components/Card/Card.jsx";
-import CardBody from "components/Card/CardBody.jsx";
-
-
 import Tarifa from "./Sections/Tarifas.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
-import SectionBasics from "./Sections/SectionBasics.jsx";
-import SectionNavbars from "./Sections/SectionNavbars.jsx";
-import SectionTabs from "./Sections/SectionTabs.jsx";
-import SectionPills from "./Sections/SectionPills.jsx";
-import SectionNotifications from "./Sections/SectionNotifications.jsx";
-import SectionTypography from "./Sections/SectionTypography.jsx";
-import SectionJavascript from "./Sections/SectionJavascript.jsx";
-import SectionCarousel from "./Sections/SectionCarousel.jsx";
-import SectionCompletedExamples from "./Sections/SectionCompletedExamples.jsx";
-import SectionLogin from "./Sections/SectionLogin.jsx";
-import SectionExamples from "./Sections/SectionExamples.jsx";
-import SectionDownload from "./Sections/SectionDownload.jsx";
-
 import componentsStyle from "assets/jss/material-kit-react/views/components.jsx";
-
 class Components extends React.Component {
   render() {
     const { classes, ...rest } = this.props;
@@ -78,5 +58,4 @@ class Components extends React.Component {
     );
   }
 }
-
 export default withStyles(componentsStyle)(Components);

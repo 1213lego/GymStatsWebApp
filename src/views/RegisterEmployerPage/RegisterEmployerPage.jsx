@@ -4,16 +4,10 @@ import withStyles from "@material-ui/core/styles/withStyles"
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 import MenuItem from '@material-ui/core/MenuItem';
-import FilledInput from '@material-ui/core/FilledInput';
-import InputLabel from '@material-ui/core/InputLabel';
-
-import Select from '@material-ui/core/Select';
 // @material-ui/icons
-
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 import Register from "@material-ui/icons/HowToReg";
-
 // core Components
 import Header from "components/Header/Header.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
@@ -27,9 +21,8 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.jsx";
 import image from "assets/img/bg2gym.jpg";
-import { TextField, FormControl, Input } from "@material-ui/core";
-import { validarToken } from "../../index.js";
-import { Redirect } from 'react-router-dom' 
+import { TextField, Input } from "@material-ui/core";
+import { validarToken, BASE_URL } from "../../index.js";
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -103,7 +96,7 @@ class RegisterPage extends React.Component {
         'Authorization': localStorage.getItem('token')
       }
     };
-    fetch('http://localhost:8080/admin/empleados', myInit)
+    fetch(BASE_URL + "/admin/empleados", myInit)
       .then(response => {
         if(response.status==201)
         {
@@ -127,21 +120,18 @@ class RegisterPage extends React.Component {
       700
     );
   }
-  componentWillMount() {
-    validarToken().then(rol=>{
-      console.log(rol);
-      if(rol=="ROLE_ADMIN")
-      {
-        this.setState({autorizado: true});
-      }
-    });
-    fetch('http://localhost:8080/generos').then(response => {
+  async componentWillMount() {
+    const rol = await validarToken();
+    if(rol=="ROLE_ADMIN"){
+      this.setState({autorizado: true});
+    }
+    fetch(BASE_URL + '/generos').then(response => {
       return response.json();
     }).then(generos => {
       this.setState({ generos: generos });
     });
 
-    fetch('http://localhost:8080/tiposdocumento').then(response => {
+    fetch(BASE_URL + "/tiposdocumento").then(response => {
       return response.json();
     }).then(tipos => {
       this.setState({ tiposdocumento: tipos });
@@ -153,7 +143,7 @@ class RegisterPage extends React.Component {
         'Authorization': localStorage.getItem('token')
       }
     };
-    fetch('http://localhost:8080/admin/tiposempleado',myInit).then(response => {
+    fetch(BASE_URL + "/admin/tiposempleado",myInit).then(response => {
       return response.json();
     }).then(tiposempleado => {
       this.setState({ tiposempleado: tiposempleado });

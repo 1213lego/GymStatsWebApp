@@ -22,7 +22,7 @@ import { Redirect } from 'react-router-dom'
 import loginPageStyle from "assets/jss/material-kit-react/views/loginPage.jsx";
 import RDialog from "components/FormDialog/Dialogs/registrarAsistenciaDialog.jsx"
 import image from "assets/img/bggym.jpg";
-import { validarToken } from "../../index.js";
+import { validarToken, BASE_URL } from "../../index.js";
 import { TextField } from "@material-ui/core";
 
 
@@ -61,7 +61,7 @@ async onSubmit(e) {
     };
     try
     {
-      let response = await fetch('http://localhost:8080/empleados/suscripciondiaria', myInit);
+      let response = await fetch(BASE_URL + "/empleados/suscripciondiaria", myInit);
       console.log(response);
       if (response.status == 200)
       {
@@ -96,6 +96,15 @@ async onSubmit(e) {
     const errores = this.state.errores;
     const { classes, ...rest } = this.props;
     return (
+      <div>
+        <Header
+          absolute
+          color="transparent"
+          brand="GymStats"
+          rightLinks={<HeaderLinks />}
+          {...rest}
+        />
+      
 
       <div
         className={classes.pageHeader}
@@ -182,6 +191,7 @@ async onSubmit(e) {
         </GridContainer>
       </div>
       <Footer whiteFont />
+  </div>
   </div>
 );
 }

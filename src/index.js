@@ -2,9 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from "react-router-dom";
-
 import "assets/scss/material-kit-react.scss?v=1.4.0";
-
 // pages for this product
 import Components from "views/Components/Components.jsx";
 import LandingPage from "views/LandingPage/LandingPage.jsx";
@@ -18,14 +16,15 @@ import RegistrarAsistenciaPage from "./views/RegistrarAsistenciaPage/RegistrarAs
 import RegistrarSubDiaria from "views/RegistrarSubscripcionDiariaPage/RegistrarSubscripcionDiariaPage.jsx";
 import RegistrarSub from "views/RegistrarSubscripcionPage/RegistrarSubscripcion.jsx";
 var hist = createBrowserHistory();
+export const BASE_URL = "http://localhost:8080";
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
-      <Route path="/empleado/registroSubs" component={RegistrarSub}/>
-      <Route path="/empleado/registroDiario" component={RegistrarSubDiaria}/>
-      <Route path="/registrarAsistencia" component={RegistrarAsistenciaPage}/>
-      <Route path="/admin/tarifas" component={AdminTarifasPage}/>
-      <Route path="/admin/maquinas" component={AdminMaquinasPage}/>
+      <Route path="/empleado/registroSubs" component={RegistrarSub} />
+      <Route path="/empleado/registroDiario" component={RegistrarSubDiaria} />
+      <Route path="/registrarAsistencia" component={RegistrarAsistenciaPage} />
+      <Route path="/admin/tarifas" component={AdminTarifasPage} />
+      <Route path="/admin/maquinas" component={AdminMaquinasPage} />
       <Route path="/landing-page" component={LandingPage} />
       <Route path="/profile-page" component={ProfilePage} />
       <Route path="/registerEmployer" component={RegisterEmployerPage} />
@@ -39,28 +38,26 @@ ReactDOM.render(
 export let tipoUsuario;
 export async function validarToken() {
   const item = localStorage.getItem("jwtresponse");
-  var resultado = '';
-  if (item)
-  {
-    var myInit =
+  var resultado = "";
+  if (item) {
+    var myInit = 
     {
-      method: 'POST',
+      method: "POST",
       body: item,
-      headers:
+      headers: 
       {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     };
-    let response=await fetch('http://localhost:8080/validate', myInit)
-    let data= await response.json();
-    resultado= data.usuario;
-    if(resultado=="expirado")
-    {
-      console.log("removio");
+    let response = await fetch(BASE_URL + "/validate", myInit);
+    let data = await response.json();
+    resultado = data.usuario;
+    if (resultado == "expirado") {
+      console.log("Hello world!");
       localStorage.removeItem("token");
       localStorage.removeItem("jwtresponse");
     }
   }
-  tipoUsuario=resultado;
+  tipoUsuario = resultado;
   return resultado;
 }

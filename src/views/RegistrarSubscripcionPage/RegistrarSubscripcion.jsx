@@ -22,7 +22,7 @@ import { Redirect } from 'react-router-dom'
 import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.jsx";
 import RDialog from "components/FormDialog/Dialogs/registrarAsistenciaDialog.jsx"
 import image from "assets/img/bggym.jpg";
-import { validarToken } from "../../index.js";
+import { validarToken, BASE_URL } from "../../index.js";
 import { TextField,MenuItem,Input } from "@material-ui/core";
 
 
@@ -71,7 +71,7 @@ async onSubmit(e) {
     };
     try
     {
-      let response = await fetch('http://localhost:8080/empleados/suscripciones', myInit);
+      let response = await fetch(BASE_URL + "/empleados/suscripciones", myInit);
       if (response.status == 200)
       {
         this.setState({errores:'Se ha registrado la subscripcion con exito a :' + this.state.documento })
@@ -107,7 +107,7 @@ async onSubmit(e) {
   {
     try
     {
-      let response = await fetch("http://localhost:8080/tarifas");
+      let response = await fetch(BASE_URL + "/tarifas");
       let data = await response.json();
       this.setState({ tarifas: data });
       console.log(data);
@@ -121,7 +121,14 @@ async onSubmit(e) {
     const errores = this.state.errores;
     const { classes, ...rest } = this.props;
     return (
-
+      <div>
+      <Header
+          absolute
+          color="transparent"
+          brand="GymStats"
+          rightLinks={<HeaderLinks />}
+          {...rest}
+        />
       <div
         className={classes.pageHeader}
         style={{
@@ -241,6 +248,7 @@ async onSubmit(e) {
         </GridContainer>
       </div>
       <Footer whiteFont />
+  </div>
   </div>
 );
 }

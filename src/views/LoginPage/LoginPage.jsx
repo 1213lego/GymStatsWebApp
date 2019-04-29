@@ -23,7 +23,7 @@ import loginPageStyle from "assets/jss/material-kit-react/views/loginPage.jsx";
 
 import image from "assets/img/bggym.jpg";
 import { TextField } from "@material-ui/core";
-import { validarToken } from "../../index.js";
+import { validarToken, BASE_URL } from "../../index.js";
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -61,12 +61,11 @@ async onSubmit(e) {
     };
     try
     {
-      let response = await fetch('http://localhost:8080/login', myInit);
+      let response = await fetch(BASE_URL + "/login", myInit);
       if (response.status == 200)
       {
         let data= await response.json();
-        var usuario=data.usuario;
-        var token=data.token;
+        let token=data.token;
         console.log("Autentico");
         this.setState({ autentico: true });
         localStorage.setItem("token", token.tokenType+" " + token.accessToken);
