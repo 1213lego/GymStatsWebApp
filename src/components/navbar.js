@@ -1,4 +1,6 @@
 import React from 'react';
+import logo from '../imagenes/gymstatsicon.svg'
+import logo2 from '../imagenes/gymstatsname.svg'
 import {
   Collapse,
   Navbar,
@@ -29,8 +31,9 @@ export default class Navvbar extends React.Component {
   render() {
     return (
       <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
+
+        <Navbar color="secondary" light expand="md">
+          <NavbarBrand href="/"><img src={logo2} className="confLogo"/></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
