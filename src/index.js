@@ -53,6 +53,7 @@ export async function validarToken() {
     let data = await response.json();
     resultado = data.usuario;
     if (resultado == "expirado") {
+      resultado="";
       console.log("Hello world!");
       localStorage.removeItem("token");
       localStorage.removeItem("jwtresponse");
