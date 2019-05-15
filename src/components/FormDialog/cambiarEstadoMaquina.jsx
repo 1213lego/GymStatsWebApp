@@ -60,7 +60,7 @@ export default class FormDialog extends React.Component {
     var myInit =
     {
       method: 'POST',
-      body: JSON.stringify(nuevaTarifa), headers: {
+      headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
       }

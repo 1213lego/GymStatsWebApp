@@ -149,6 +149,9 @@ function MenuAdmin(props) {
             <Link to="/admin/maquinas" className={props.classes.dropdownLink}>
             Agregar Maquina
             </Link>,
+             <Link to="/admin/mis-empleados" className={props.classes.dropdownLink}>
+             Ver Mis Empleados
+             </Link>,
           <a
             href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
             target="_blank"
