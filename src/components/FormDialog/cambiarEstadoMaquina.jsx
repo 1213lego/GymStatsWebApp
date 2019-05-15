@@ -34,7 +34,8 @@ export default class FormDialog extends React.Component {
     super(props);
     this.state = {
       open: false,
-      estados: []
+      estados: [],
+      idEstadoMaquina: null
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -55,13 +56,7 @@ export default class FormDialog extends React.Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    const nuevaTarifa = {
-
-      nombreTarifa: this.state.nombreTarifa,
-      precio: this.state.precio,
-      duracionDias: this.state.duracionDias
-    };
-    console.log(nuevaTarifa);
+    const { maquina } = this.props;
     var myInit =
     {
       method: 'POST',
@@ -71,17 +66,6 @@ export default class FormDialog extends React.Component {
       }
 
     };
-    fetch('http://localhost:8080/admin/tarifas', myInit)
-      .then(response => {
-        if (response.status == 201) {
-          alert("Se ha registrado satisfatoriamente la tarifa");
-        }
-        else {
-          alert("Ha fallado el registro");
-        }
-        return response.json();
-      });
-
   }
 
   handleClickOpen = () => {
@@ -112,14 +96,13 @@ export default class FormDialog extends React.Component {
               <DialogContentText>
                 Seleccione el nuevo estado
             </DialogContentText>
-              <FormControl className={styles.formControl}>
-                <InputLabel className={styles.formControl}  htmlFor="age-simple">Age</InputLabel>
-                <Select className={styles.formControl}
-                  value={this.state.age}
+              <FormControl >
+                <InputLabel  htmlFor="age-simple">Age</InputLabel>
+                <Select 
                   onChange={this.handleChange}
                   inputProps={{
-                    name: 'age',
-                    id: 'age-simple',
+                    name: 'idEstadoMaquina',
+                    id: 'idEstadoMaquina',
                   }}
                 >
                 {
