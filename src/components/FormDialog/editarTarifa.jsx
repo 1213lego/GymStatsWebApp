@@ -85,7 +85,7 @@ export default class FormDialog extends React.Component {
     return (
       <Fragment>
       <div style={{marginTop:"40px"}}>
-      <Button variant="raised" color="#ffffff" onClick={this.handleClickOpen}>
+      <Button round variant="raised" color="#ffffff" onClick={this.handleClickOpen}>
           <h4>Editar Tarifa</h4>
         </Button>
         </div>

@@ -87,7 +87,7 @@ class RegisterPage extends React.Component {
       genero: { id: this.state.id }, //idgenero
       tipoDocumento: { tipodocumento: this.state.tipodocumento }
     };
-    console.log(nuevoEmpleado);
+    console.log(JSON.stringify(nuevoEmpleado));
     var myInit =
     {
       method: 'POST',

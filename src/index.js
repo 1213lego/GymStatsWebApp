@@ -16,12 +16,16 @@ import RegistrarAsistenciaPage from "./views/RegistrarAsistenciaPage/RegistrarAs
 import RegistrarSubDiaria from "views/RegistrarSubscripcionDiariaPage/RegistrarSubscripcionDiariaPage.jsx";
 import RegistrarSub from "views/RegistrarSubscripcionPage/RegistrarSubscripcion.jsx";
 import AdminListarEmpPage from "views/AdminListarEmpPage/AdminListarEmpPage.jsx";
+import ListarClientes from "views/ListarClientes/ListaClientes.jsx"
+import HistorialSuscripciones from "views/HistorialSuscripciones/HistorialSuscripciones.jsx"
 var hist = createBrowserHistory();
-export const BASE_URL = "http://10.30.0.12:8080";
+export const BASE_URL = "http://localhost:8080";
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
-    <Route path="/admin/mis-empleados" component={AdminListarEmpPage} />
+      <Route path="/admin/mis-empleados" component={AdminListarEmpPage} />
+      <Route path="/clientes-suscripciones" component={HistorialSuscripciones} />
+      <Route path="/clientes" component={ListarClientes} />
       <Route path="/empleado/registroSubs" component={RegistrarSub} />
       <Route path="/empleado/registroDiario" component={RegistrarSubDiaria} />
       <Route path="/registrarAsistencia" component={RegistrarAsistenciaPage} />

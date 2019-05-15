@@ -34,8 +34,8 @@ const styles = theme => ({
   },
 });
 function CustomizedTable(props) {
-  const { classes , empleados } = props;
-  console.log(empleados);
+  const { classes , clientes } = props;
+  console.log(clientes);
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
@@ -44,20 +44,18 @@ function CustomizedTable(props) {
             <CustomTableCell>Nombres</CustomTableCell>
             <CustomTableCell align="right">Apellidos</CustomTableCell>
             <CustomTableCell align="right">Documento</CustomTableCell>
-            <CustomTableCell align="right">Tipo De Empleado</CustomTableCell>
             <CustomTableCell align="right">Email</CustomTableCell>
             <CustomTableCell align="right">Genero</CustomTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {empleados.map(row => (
+          {clientes.map(row => (
             <TableRow className={classes.row} key={row.id}>
               <CustomTableCell component="th" scope="row">
                 {row.nombres}
               </CustomTableCell>
               <CustomTableCell align="right">{row.apellidos}</CustomTableCell>
               <CustomTableCell align="right">{row.documento}</CustomTableCell>
-              <CustomTableCell align="right">{row.empleado.tipoEmpleado.tipoUsuario}</CustomTableCell>
               <CustomTableCell align="right">{row.email}</CustomTableCell>
               <CustomTableCell align="right">{row.genero.genero}</CustomTableCell>
             </TableRow>
