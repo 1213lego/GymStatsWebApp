@@ -26,10 +26,26 @@ class AdminListarEmpPage extends React.Component {
       empleados: []
     };
   }
+  async componentWillMount(){
+    var myInit =
+    {
+      method: 'GET',
+      headers: {
+      'Authorization': localStorage.getItem('token')
+      }
+    };
+    try{
+      let response= await fetch((BASE_URL + "/admin/listar-empleados/0/50"),myInit);
+      let data= await response.json();
+      this.setState({empleados: data.content})
+    }
+    catch(e){
+      console.log(e);
+    }
+  }
   render() {
     const empleados = this.state.empleados;
     const  {classes,... rest}  = this.props;
-    
     return (
       <div style={{ justifyContent: "center", alignItems: "center" }}>
       <Header
@@ -75,7 +91,7 @@ class AdminListarEmpPage extends React.Component {
             marginTop: "20px"
           }}
         >
-        <EmployerTable/>
+        <EmployerTable empleados={empleados}/>
 
         </div>
 

@@ -14,6 +14,7 @@ import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import Add from '@material-ui/icons/Add'
 import { BASE_URL } from '../..';
+import { number } from 'prop-types';
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -35,7 +36,7 @@ export default class FormDialog extends React.Component {
     this.state = {
       open: false,
       estados: [],
-      idEstadoMaquina: null
+      idEstadoMaquina: 1
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -54,18 +55,32 @@ export default class FormDialog extends React.Component {
       console.log(e);
     }
   }
-  onSubmit(e) {
+  async onSubmit(e) {
     e.preventDefault();
     const { maquina } = this.props;
     var myInit =
     {
-      method: 'POST',
+      method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
       }
-
     };
+    console.log("id maquina " + maquina.id);
+    console.log("id estado " + this.state.idEstadoMaquina)
+    try{
+      let response= await fetch((BASE_URL+"/admin/maquinas/"+maquina.id+"/estado/" +this.state.idEstadoMaquina+""),myInit);
+      console.log(response);
+      if(response.status==200){
+        window.location.reload();
+      }
+      else{
+        alert("No se cambio el estado");
+      }
+    }
+    catch(e){
+      alert("No se cambio el estado");
+      console.log(e);
+    }
   }
 
   handleClickOpen = () => {
@@ -97,10 +112,12 @@ export default class FormDialog extends React.Component {
                 Seleccione el nuevo estado
             </DialogContentText>
               <FormControl >
-                <InputLabel  htmlFor="age-simple">Age</InputLabel>
                 <Select 
-                  onChange={this.handleChange}
-                  inputProps={{
+                name="idEstadoMaquina"
+                id="idEstadoMaquina"
+                value={this.state.idEstadoMaquina}
+                onChange={this.onChange}
+                inputProps={{
                     name: 'idEstadoMaquina',
                     id: 'idEstadoMaquina',
                   }}
