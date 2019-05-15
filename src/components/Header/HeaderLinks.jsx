@@ -24,6 +24,11 @@ class HeaderLinks extends React.Component {
     this.state = {
       rol: ''
     }
+    this.onClickCerrarSesion = this.onClickCerrarSesion.bind(this);
+  }
+  onClickCerrarSesion(e) {
+    localStorage.removeItem("token");
+    localStorage.removeItem("jwtresponse");
   }
   async componentWillMount() 
   {
@@ -46,17 +51,20 @@ class HeaderLinks extends React.Component {
             pTipo == "ROLE_CLIENTE" ? <MenuCliente classes={classes}></MenuCliente> : pTipo == "ROLE_EMPLEADO" ?
               <MenuEmpleado classes={classes}></MenuEmpleado> : <ListItem className={classes.listItem}> </ListItem>
         }
-        <ListItem className={classes.listItem}>
+        {
+          pTipo == '' ? <ListItem className={classes.listItem}>
           <Link to="/register-page" className={classes.navLink}>
             Registro
             </Link>
-        </ListItem>
-        <ListItem className={classes.listItem}>
+         </ListItem> : <ListItem className={classes.listItem}> </ListItem>
+        }
+        {
+          pTipo == '' ? <ListItem className={classes.listItem}>
           <Link to="/login-page" className={classes.navLink}>
             Login
           </Link>
-
-        </ListItem>
+          </ListItem> :  <ListItem className={classes.listItem}> </ListItem>
+        }
         <ListItem className={classes.listItem}>
           <Tooltip
             id="instagram-twitter"
@@ -108,6 +116,13 @@ class HeaderLinks extends React.Component {
             </Button>
           </Tooltip>
         </ListItem>
+        {
+          pTipo != '' ? <ListItem className={classes.listItem}>
+          <Link to="/" onClick={this.onClickCerrarSesion} className={classes.navLink}>
+            Cerrar sesion
+            </Link>
+        </ListItem> : <ListItem className={classes.listItem}> </ListItem>     
+        }
       </List>
     );
   }

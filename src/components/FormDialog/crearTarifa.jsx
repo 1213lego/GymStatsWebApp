@@ -9,6 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Add from '@material-ui/icons/Add'
+import { BASE_URL } from '../..';
 
 export default class FormDialog extends React.Component {
   constructor(props)
@@ -48,7 +49,7 @@ export default class FormDialog extends React.Component {
         }
 
     };
-    fetch('http://localhost:8080/admin/tarifas', myInit)
+    fetch(BASE_URL+'/admin/tarifas', myInit)
     .then(response => {
       if(response.status==201)
       {

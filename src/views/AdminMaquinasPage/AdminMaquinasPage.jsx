@@ -15,7 +15,7 @@ import Button from "components/CustomButtons/Button.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 import AñadirMaquina from "components/FormDialog/añadirMaquina.jsx";
-
+import Maquinas from "../Components/Sections/Maquinas.jsx"
 import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.jsx";
 
 // Sections for this page
@@ -40,13 +40,12 @@ class AdminTarifasPage extends React.Component {
           }}
           {...rest}
         />
-        <Parallax filter image={require("assets/img/maquinaimage.jpg")}>
+        <Parallax filter image={require("assets/img/bgprincipal.jpg")}>
           <div className={classes.container}>
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
 
                 <h1>Modulo Añadir Maquinas</h1>
-
                 <br />
 
               </GridItem>
@@ -58,8 +57,8 @@ class AdminTarifasPage extends React.Component {
             <div style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
             <AñadirMaquina/>
             </div>
-            {/*TODO LISTAR MAQUINAS EN UN TABLE PREFERIBLEMENTE*/}
           </div>
+          <Maquinas/>
         </div>
   </div>
     );
