@@ -11,7 +11,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Add from '@material-ui/icons/Add'
 import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.jsx";
-
+import {BASE_URL}  from "../../index.js"
 
 const styles = theme => ({
   container: {
@@ -57,7 +57,7 @@ class FormDialog extends React.Component {
   }
   componentWillMount()
   {
-    fetch('http://localhost:8080/estadosmaquina').then(response =>{
+    fetch(BASE_URL+'/estadosmaquina').then(response =>{
       return response.json();
     }).then(estadosMaquinas => {
       this.setState({estadosMaquinas:estadosMaquinas});
@@ -88,7 +88,7 @@ class FormDialog extends React.Component {
         }
 
     };
-    fetch('http://localhost:8080/admin/maquinas', myInit)
+    fetch((BASE_URL+'/admin/maquinas'), myInit)
     .then(response => {
       console.log(response);
       if(response.status==201)
