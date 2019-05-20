@@ -15,11 +15,17 @@ import AdminMaquinasPage from "views/AdminMaquinasPage/AdminMaquinasPage.jsx";
 import RegistrarAsistenciaPage from "./views/RegistrarAsistenciaPage/RegistrarAsistenciaPage";
 import RegistrarSubDiaria from "views/RegistrarSubscripcionDiariaPage/RegistrarSubscripcionDiariaPage.jsx";
 import RegistrarSub from "views/RegistrarSubscripcionPage/RegistrarSubscripcion.jsx";
+import AdminListarEmpPage from "views/AdminListarEmpPage/AdminListarEmpPage.jsx";
+import ListarClientes from "views/ListarClientes/ListaClientes.jsx"
+import HistorialSuscripciones from "views/HistorialSuscripciones/HistorialSuscripciones.jsx"
 var hist = createBrowserHistory();
 export const BASE_URL = "http://localhost:8080";
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
+      <Route path="/admin/mis-empleados" component={AdminListarEmpPage} />
+      <Route path="/clientes-suscripciones" component={HistorialSuscripciones} />
+      <Route path="/clientes" component={ListarClientes} />
       <Route path="/empleado/registroSubs" component={RegistrarSub} />
       <Route path="/empleado/registroDiario" component={RegistrarSubDiaria} />
       <Route path="/registrarAsistencia" component={RegistrarAsistenciaPage} />
@@ -53,6 +59,7 @@ export async function validarToken() {
     let data = await response.json();
     resultado = data.usuario;
     if (resultado == "expirado") {
+      resultado="";
       console.log("Hello world!");
       localStorage.removeItem("token");
       localStorage.removeItem("jwtresponse");

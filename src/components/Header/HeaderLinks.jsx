@@ -30,8 +30,7 @@ class HeaderLinks extends React.Component {
     localStorage.removeItem("token");
     localStorage.removeItem("jwtresponse");
   }
-  async componentWillMount() 
-  {
+  async componentWillMount() {
     console.log("de headerlink" + await validarToken())
     this.setState({ rol: tipoUsuario });
   }
@@ -53,17 +52,17 @@ class HeaderLinks extends React.Component {
         }
         {
           pTipo == '' ? <ListItem className={classes.listItem}>
-          <Link to="/register-page" className={classes.navLink}>
-            Registro
+            <Link to="/register-page" className={classes.navLink}>
+              Registro
             </Link>
-         </ListItem> : <ListItem className={classes.listItem}> </ListItem>
+          </ListItem> : <ListItem className={classes.listItem}> </ListItem>
         }
         {
           pTipo == '' ? <ListItem className={classes.listItem}>
-          <Link to="/login-page" className={classes.navLink}>
-            Login
+            <Link to="/login-page" className={classes.navLink}>
+              Login
           </Link>
-          </ListItem> :  <ListItem className={classes.listItem}> </ListItem>
+          </ListItem> : <ListItem className={classes.listItem}> </ListItem>
         }
         <ListItem className={classes.listItem}>
           <Tooltip
@@ -118,10 +117,10 @@ class HeaderLinks extends React.Component {
         </ListItem>
         {
           pTipo != '' ? <ListItem className={classes.listItem}>
-          <Link to="/" onClick={this.onClickCerrarSesion} className={classes.navLink}>
-            Cerrar sesion
+            <Link to="/" onClick={this.onClickCerrarSesion} className={classes.navLink}>
+              Cerrar sesion
             </Link>
-        </ListItem> : <ListItem className={classes.listItem}> </ListItem>     
+          </ListItem> : <ListItem className={classes.listItem}> </ListItem>
         }
       </List>
     );
@@ -143,12 +142,18 @@ function MenuAdmin(props) {
           <Link to="/registerEmployer" className={props.classes.dropdownLink}>
             Registrar Empleado
             </Link>,
-            <Link to="/admin/tarifas" className={props.classes.dropdownLink}>
+          <Link to="/admin/tarifas" className={props.classes.dropdownLink}>
             Agregar Tarifa
             </Link>,
-            <Link to="/admin/maquinas" className={props.classes.dropdownLink}>
+          <Link to="/admin/maquinas" className={props.classes.dropdownLink}>
             Agregar Maquina
             </Link>,
+          <Link to="/admin/mis-empleados" className={props.classes.dropdownLink}>
+            Ver Mis Empleados
+             </Link>,
+          <Link to="/clientes" className={props.classes.dropdownLink}>
+            Ver Mis clientes
+             </Link>,
           <a
             href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
             target="_blank"
@@ -176,9 +181,12 @@ function MenuEmpleado(props) {
           <Link to="/empleado/registroDiario" className={props.classes.dropdownLink}>
             Registrar Sub. Diaria
             </Link>,
-            <Link to="/empleado/registroSubs" className={props.classes.dropdownLink}>
-              Registrar Subscripción
+          <Link to="/empleado/registroSubs" className={props.classes.dropdownLink}>
+            Registrar Subscripción
               </Link>,
+          <Link to="/clientes" className={props.classes.dropdownLink}>
+            Ver Mis clientes
+             </Link>,
           <a
             href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
             target="_blank"
@@ -207,6 +215,9 @@ function MenuCliente(props) {
           <Link to="/" className={props.classes.dropdownLink}>
             --
               </Link>,
+          <Link to="/clientes-suscripciones" className={props.classes.dropdownLink}>
+            Mis suscripciones
+            </Link>,
           <a
             href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
             target="_blank"

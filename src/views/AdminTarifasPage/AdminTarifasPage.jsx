@@ -15,7 +15,7 @@ import Button from "components/CustomButtons/Button.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 import CrearTarifa from "components/FormDialog/crearTarifa.jsx";
-import Tarifa from "views/Components/Sections/Tarifas.jsx";
+import TarifasAdmin from "views/Components/Sections/TarifasAdmin.jsx";
 import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.jsx";
 
 // Sections for this page
@@ -46,9 +46,7 @@ class AdminTarifasPage extends React.Component {
               <GridItem xs={12} sm={12} md={6}>
 
                 <h1>Modulo Agregar Tarifas</h1>
-
                 <br />
-
               </GridItem>
             </GridContainer>
           </div>
@@ -58,12 +56,11 @@ class AdminTarifasPage extends React.Component {
             <div style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
             <CrearTarifa/>
             </div>
-            <Tarifa/>
+            <TarifasAdmin/>
           </div>
         </div>
   </div>
     );
   }
 }
-
 export default withStyles(landingPageStyle)(AdminTarifasPage);
