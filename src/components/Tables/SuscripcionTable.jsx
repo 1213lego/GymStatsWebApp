@@ -34,32 +34,28 @@ const styles = theme => ({
   },
 });
 function CustomizedTable(props) {
-  const { classes , empleados } = props;
-  console.log(empleados);
+  const { classes , suscripciones } = props;
+  console.log(suscripciones);
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <CustomTableCell>Nombres</CustomTableCell>
-            <CustomTableCell align="right">Apellidos</CustomTableCell>
-            <CustomTableCell align="right">Documento</CustomTableCell>
-            <CustomTableCell align="right">Tipo De Empleado</CustomTableCell>
-            <CustomTableCell align="right">Email</CustomTableCell>
-            <CustomTableCell align="right">Genero</CustomTableCell>
+            <CustomTableCell align="left">Fecha inicio</CustomTableCell>
+            <CustomTableCell align="left">Fecha fin</CustomTableCell>
+            <CustomTableCell align="left">Precio</CustomTableCell>
+            <CustomTableCell align="left">Estado</CustomTableCell>
+            <CustomTableCell align="left">Tarifa</CustomTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {empleados.map(row => (
-            <TableRow className={classes.row} key={row.id}>
-              <CustomTableCell component="th" scope="row">
-                {row.nombres}
-              </CustomTableCell>
-              <CustomTableCell align="right">{row.apellidos}</CustomTableCell>
-              <CustomTableCell align="right">{row.documento}</CustomTableCell>
-              <CustomTableCell align="right">{row.empleado.tipoEmpleado.tipoUsuario}</CustomTableCell>
-              <CustomTableCell align="right">{row.email}</CustomTableCell>
-              <CustomTableCell align="right">{row.genero.genero}</CustomTableCell>
+          {suscripciones.map(row => (
+            <TableRow className={classes.row} key={row.idSubscripcion}>
+              <CustomTableCell align="left"> {row.fechaInicio}</CustomTableCell>
+              <CustomTableCell align="left">{row.fechaFin}</CustomTableCell>
+              <CustomTableCell align="left">{row.precio}</CustomTableCell>
+              <CustomTableCell align="left">{row.estadoSuscripcion.estadoSuscripcion}</CustomTableCell>
+              <CustomTableCell align="left">{row.tarifa.nombreTarifa}</CustomTableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -71,6 +67,5 @@ function CustomizedTable(props) {
 CustomizedTable.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
 
 export default withStyles(styles)(CustomizedTable);
