@@ -19,12 +19,14 @@ import AdminListarEmpPage from "views/AdminListarEmpPage/AdminListarEmpPage.jsx"
 import ListarClientes from "views/ListarClientes/ListaClientes.jsx"
 import HistorialSuscripciones from "views/HistorialSuscripciones/HistorialSuscripciones.jsx"
 import EmployerTipoMedidaPage from "views/EmployerTipoMedidaPage/EmployerTipoMedidaPage.jsx";
+import Autocomplete from "./Autocomplete";
 var hist = createBrowserHistory();
 export const BASE_URL = "http://localhost:8080";
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
-    <Route path="/empleado/añadir-medidas" component={EmployerTipoMedidaPage} />
+      <Route path="/autocomplete" component={Autocomplete} />
+      <Route path="/empleado/añadir-medidas" component={EmployerTipoMedidaPage} />
       <Route path="/admin/mis-empleados" component={AdminListarEmpPage} />
       <Route path="/clientes-suscripciones" component={HistorialSuscripciones} />
       <Route path="/clientes" component={ListarClientes} />
