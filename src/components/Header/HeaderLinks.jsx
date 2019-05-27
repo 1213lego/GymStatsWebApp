@@ -188,6 +188,9 @@ function MenuEmpleado(props) {
           <Link to="/clientes" className={props.classes.dropdownLink}>
             Ver Mis clientes
              </Link>,
+             <Link to="/empleado/añadir-medidas" className={props.classes.dropdownLink}>
+            Añadir Tipo De Medida
+              </Link>,
           <a
             href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
             target="_blank"
