@@ -14,7 +14,7 @@ class Tarifas extends React.Component {
 
   async componentWillMount() {
     try {
-      let response = await fetch(BASE_URL + "/añadir-medidas");
+      let response = await fetch(BASE_URL + "/tipos-medidas");
       let data = await response.json();
       this.setState({ tiposMedida: data });
       console.log(data);

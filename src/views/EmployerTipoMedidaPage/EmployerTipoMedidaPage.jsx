@@ -14,7 +14,7 @@ import GridItem from "components/Grid/GridItem.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
-import AñadirMaquina from "components/FormDialog/añadirMaquina.jsx";
+import AñadirTipoMedida from "components/FormDialog/añadirTipoMedida.jsx";
 import TipoMedida from "../Components/Sections/TipoMedida.jsx"
 import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.jsx";
 
@@ -55,7 +55,7 @@ class AdminTarifasPage extends React.Component {
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
             <div style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
-            <AñadirMaquina/>
+            <AñadirTipoMedida/>
             </div>
           </div>
           <TipoMedida/>

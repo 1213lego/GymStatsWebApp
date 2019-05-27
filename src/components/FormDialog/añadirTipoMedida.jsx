@@ -51,42 +51,18 @@ class FormDialog extends React.Component {
 
   }
   
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
 
   onSubmit(e){
     e.preventDefault();
-    const nuevoTipoMedida = {
-      nombre: this.state.nombre,
-      
-      descripcion: this.state.descripcion,
-      medidaCliente : {
-        idMedida: this.state.idMedida
-      }
-    };
-    console.log(nuevoTipoMedida);
-    var myInit =
-    {
-        method: 'POST',
-        body: JSON.stringify(nuevoTipoMedida),headers:{
-          'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem('token')
-        }
-
-    };
-    fetch((BASE_URL+'/empleado/añadir-medidas'), myInit)
-    .then(response => {
-      console.log(response);
-      if(response.status==201)
-      {
-        alert("Se ha añadido satisfatoriamente El tipo de medida ");
-      }
-      else{
-        alert("Ha fallado el registro");
-      }
-      return response.json();
-    }).then(data=>{console.log(data)});
+  
+    alert("aaaaa");
 
   }
-
+  
+    
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -136,27 +112,7 @@ class FormDialog extends React.Component {
               onChange={this.onChange}
               fullWidth
             />
-            <TextField
-              id="medidaSpinner"
-              select
-                name="idMedida"
-                label="Medida Clientes"
-                margin="dense"
-                className={classes.textField}
-                value={this.state.idEstadoMaquina}
-                onChange={this.onChange}
-                SelectProps={{
-                  MenuProps: {
-                    className: classes.menu,
-                  },
-                }}
-              >
-                {
-                  this.state.estadosMaquinas.map((estadoMaquina) => (
-                    <MenuItem value={estadoMaquina.idEstadoMaquina}>{estadoMaquina.estadoMaquina}</MenuItem>
-                  ))
-                }
-              </TextField>
+            
             
           </DialogContent>
           <DialogActions>
