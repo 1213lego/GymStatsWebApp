@@ -72,10 +72,10 @@ async onSubmit(e) {
     };
     try
     {
-      let response = await fetch(BASE_URL + "/empleados/suscripciones", myInit);
+      let response = await fetch(BASE_URL + "/empleados/añadir-medida-cliente", myInit);
       if (response.status == 200)
       {
-        this.setState({errores:'Se ha registrado la subscripcion con exito a :' + this.state.documento })
+        this.setState({errores:'Se ha registrado las medidas con exito a :' + this.state.documento })
       }
       else if(response.status==201)
       {
@@ -140,7 +140,7 @@ async onSubmit(e) {
         >
           <div className={classes.container}>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={5}>
+              <GridItem xs={12} sm={12} md={4}>
                 <Card className={classes[this.state.cardAnimaton]}>
                   <form
                     className={classes.form}
@@ -230,17 +230,19 @@ async onSubmit(e) {
                         ))
                       }
 
-                      </TextField>
+                      </TextField></div>
                      
-                      <TextField
+                     <div style={{display:"flex",justifyContent:"center"}}>
+                     <TextField
+                     
               autoFocus
-              margin="dense"
+              margin="normal"
               name="valorMedida"
               value={this.state.valorMedida}
               label="Valor de la Medida"
               type="number"
               onChange={this.onChange}
-              fullWidth
+              
             />
                   </div>
                   {
