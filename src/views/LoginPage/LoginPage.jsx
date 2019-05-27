@@ -73,7 +73,7 @@ async onSubmit(e) {
         console.log(localStorage.getItem("token"));
         console.log(localStorage.getItem("jwtresponse"));
         this.setState({autentico: true})
-        alert("Inicio de sesion exitoso");
+        window.location.replace("http://localhost:3000");
       }
       else
       {

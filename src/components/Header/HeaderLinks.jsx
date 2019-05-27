@@ -29,6 +29,7 @@ class HeaderLinks extends React.Component {
   onClickCerrarSesion(e) {
     localStorage.removeItem("token");
     localStorage.removeItem("jwtresponse");
+    window.location.replace("http://localhost:3000/login-page");
   }
   async componentWillMount() {
     console.log("de headerlink" + await validarToken())
