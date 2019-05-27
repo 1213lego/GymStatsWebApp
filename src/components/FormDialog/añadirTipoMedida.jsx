@@ -42,7 +42,8 @@ class FormDialog extends React.Component {
     super(props);
     this.state = {
       open: false,
-      
+      descripcion: '',
+      nombre: ''
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -55,14 +56,28 @@ class FormDialog extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  onSubmit(e){
+  async onSubmit(e){
     e.preventDefault();
-  
-    alert("aaaaa");
-
+    const tipoMedida= {
+      descripcion: this.state.descripcion,
+      nombre: this.state.nombre
+    };
+    var myInit =
+    {
+        method: 'POST',
+        body: JSON.stringify(tipoMedida),headers:{
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
+    };
+    let reponse = await fetch(BASE_URL+"/empleados/tipos-medida",myInit);
+    if(reponse.status==201){
+      window.location.reload();
+    }
+    else{
+      alert("No se guardo el tipo de medida")
+    }
   }
-  
-    
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -91,7 +106,6 @@ class FormDialog extends React.Component {
             <DialogContentText>
                 Rellenar el formulario para añadir un tipo de medida a la base de datos
             </DialogContentText>
-
             <TextField
               autoFocus
               color="#d39539"
@@ -102,7 +116,6 @@ class FormDialog extends React.Component {
               onChange={this.onChange}
               fullWidth
             />
-            
             <TextField
               autoFocus
               margin="dense"
@@ -112,8 +125,6 @@ class FormDialog extends React.Component {
               onChange={this.onChange}
               fullWidth
             />
-            
-            
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
@@ -122,7 +133,6 @@ class FormDialog extends React.Component {
             <Button onSubmit onClick={this.handleClose} color="primary" variant="raised" type="submit">
               Añadir Tipo De Medida
             </Button>
-
           </DialogActions>
           </form>
         </Dialog>
