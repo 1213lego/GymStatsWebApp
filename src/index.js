@@ -19,12 +19,15 @@ import AdminListarEmpPage from "views/AdminListarEmpPage/AdminListarEmpPage.jsx"
 import ListarClientes from "views/ListarClientes/ListaClientes.jsx"
 import HistorialSuscripciones from "views/HistorialSuscripciones/HistorialSuscripciones.jsx"
 import EmployerTipoMedidaPage from "views/EmployerTipoMedidaPage/EmployerTipoMedidaPage.jsx";
-import TomarMedidasCliente from "views/TomarMedidasCliente/TomarMedidasCliente.jsx"
+import TomarMedidasCliente from "views/TomarMedidasCliente/TomarMedidasCliente.jsx";
+import AgregarRutinaPage from "views/AgregarRutinaPage/AgregarRutinaPage.jsx";
+
 var hist = createBrowserHistory();
-export const BASE_URL = "http://10.30.9.125:8080";
+export const BASE_URL = "http://10.30.4.52:8080";
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
+    <Route path ="/empleado/agregar-rutinas" component={AgregarRutinaPage}/>
       <Route path ="/empleado/tomar-medidas" component={TomarMedidasCliente}/>
     <Route path="/empleado/añadir-medidas" component={EmployerTipoMedidaPage} />
       <Route path="/admin/mis-empleados" component={AdminListarEmpPage} />
