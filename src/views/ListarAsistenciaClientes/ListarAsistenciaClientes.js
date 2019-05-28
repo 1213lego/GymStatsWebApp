@@ -17,7 +17,7 @@ import AsistenciaTable from "../../components/Tables/AsistenciaTable";
 
 const dashboardRoutes = [];
 
-class AdminListarAsistenciaEmpPage extends React.Component {
+class ListarAsistenciaClientes extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -41,11 +41,8 @@ class AdminListarAsistenciaEmpPage extends React.Component {
           <div className={classes.container}>
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
-
-                <h2>Asistencias de Mis Empleados</h2>
-
+                <h2>Asistencias de Mis Clientes</h2>
                 <br />
-
               </GridItem>
             </GridContainer>
           </div>
@@ -73,11 +70,10 @@ class AdminListarAsistenciaEmpPage extends React.Component {
           { title: 'Nombre', field: 'usuario.nombres' },
           { title: 'Apellidos', field: 'usuario.apellidos'},
           { title: 'Fecha de ingreso', field: 'fechaIngreso' },
-          { title: 'Fecha de salida' , field: 'fechaSalida' },
-          { title: 'Tipo Empleado', field: 'usuario.empleado.tipoEmpleado.tipoUsuario' }
+          { title: 'Fecha de salida' , field: 'fechaSalida' }
         ]}
         title={" "}
-        ruta={"/admin/asistencia-empleados"}
+        ruta={"/empleados/asistencia-clientes"}
         >
         </AsistenciaTable>
         </div>
@@ -87,5 +83,5 @@ class AdminListarAsistenciaEmpPage extends React.Component {
     );
   }
 }
-export default withStyles(landingPageStyle) (AdminListarAsistenciaEmpPage);
+export default withStyles(landingPageStyle) (ListarAsistenciaClientes);
 

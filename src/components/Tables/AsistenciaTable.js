@@ -1,23 +1,17 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 import { BASE_URL } from '../..';
-class ClientesTable extends React.Component {
+class AsistenciaTable extends React.Component {
   constructor(props) {
     super(props);
-
     this.tableRef = React.createRef();
   }
   render() {
+    const {columns, title, ruta}=this.props;
     return (
       <MaterialTable
-        title="Remote Data Preview"
-        columns={[
-          { title: 'Documento', field: 'documento' },
-          { title: 'Nombre', field: 'nombres' },
-          { title: 'Apellidos', field: 'apellidos'},
-          { title: 'Fecha inicio', field: 'fechaInicio' },
-          { title: 'Fecha fin' , field: 'fechaFin' }
-        ]}
+        title={title}
+        columns={columns}
         data={query =>
           new Promise((resolve, reject) => {
             var myInit =
@@ -27,7 +21,7 @@ class ClientesTable extends React.Component {
                 'Authorization': localStorage.getItem('token')
               }
             };
-            let url = BASE_URL + "/listarasistencia-usuario"
+            let url = BASE_URL + ruta
             url += '/' + (query.page)
             url += '/' + query.pageSize
             console.log(url);
@@ -64,4 +58,4 @@ class ClientesTable extends React.Component {
     )
   }
 }
-export default (ClientesTable)
+export default (AsistenciaTable)

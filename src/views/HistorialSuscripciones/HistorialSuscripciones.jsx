@@ -59,50 +59,10 @@ class HistorialSuscripciones extends React.Component {
       }
     }
     catch(e){
-      alert("asasa")
-      console.log(e);
-    }
-  }
-  async componentWillMount(){
-    var accestoken= JSON.parse(localStorage.getItem("jwtresponse"));
-    var tokenString=accestoken.accessToken+"";
-    console.log(tokenString);
-    var token=
-    {
-      token : tokenString
-    }
-    console.log(token);
-    var myInit =
-    {
-      method: 'POST',
-      body: JSON.stringify(token),
-      headers: {
-      'Authorization': localStorage.getItem('token'),
-      'Content-Type': 'application/json'
-      }
-    };
-    try{
-      let response= await fetch((BASE_URL + "/clientes/mis-suscripciones/0/20"),myInit);
-      console.log(response);
-      if(response.status==200){
-        let data= await response.json();
-        console.log(data);
-        this.setState({suscripciones: data.content})
-      }
-      else if(response.status==403){
-        alert("Por favor inicie sesion");
-      }
-      else if(response.status==401){
-        alert("No tiene eres un cliente")
-      }
-    }
-    catch(e){
-      alert("asasa")
       console.log(e);
     }
   }
   render() {
-    const suscripciones = this.state.suscripciones;
     const  {classes,... rest}  = this.props;
     return (
       <div style={{ justifyContent: "center", alignItems: "center" }}>

@@ -155,6 +155,12 @@ function MenuAdmin(props) {
           <Link to="/clientes" className={props.classes.dropdownLink}>
             Ver Mis clientes
              </Link>,
+          <Link to="/admin/asistencia-empleados" className={props.classes.dropdownLink}>
+            Asistencias empleados
+                </Link>,
+          <Link to="/asistencia-clientes" className={props.classes.dropdownLink}>
+            Asistencias clientes
+                </Link>,
           <a
             href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
             target="_blank"
@@ -188,11 +194,15 @@ function MenuEmpleado(props) {
           <Link to="/clientes" className={props.classes.dropdownLink}>
             Ver Mis clientes
              </Link>,
-             <Link to="/empleado/añadir-medidas" className={props.classes.dropdownLink}>
+          <Link to="/empleado/añadir-medidas" className={props.classes.dropdownLink}>
             Añadir Tipo De Medida
               </Link>,
-              <Link to="/empleado/tomar-medidas" className={props.classes.dropdownLink}>
-              Tomar Medidas a un cliente
+          <Link to="/empleado/tomar-medidas" className={props.classes.dropdownLink}>
+            Tomar Medidas a un cliente
+                </Link>,
+          ,
+          <Link to="/asistencia-clientes" className={props.classes.dropdownLink}>
+            Asistencias clientes
                 </Link>,
           <a
             href="https://creativetimofficial.github.io/material-kit-react/#/documentation"

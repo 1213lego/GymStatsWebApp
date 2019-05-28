@@ -24,9 +24,6 @@ import RDialog from "components/FormDialog/Dialogs/registrarAsistenciaDialog.jsx
 import image from "assets/img/bggym.jpg";
 import { validarToken, BASE_URL } from "../../index.js";
 import { TextField, MenuItem, Input } from "@material-ui/core";
-
-
-
 class TomarMedidaCliente extends React.Component {
   constructor(props) {
     super(props);
