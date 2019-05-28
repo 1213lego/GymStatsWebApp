@@ -26,7 +26,7 @@ class HistorialSuscripciones extends React.Component {
       suscripciones: []
     };
     this.onclickCongelarSuscripcion=this.onclickCongelarSuscripcion.bind(this);
-  }
+  } 
   async onclickCongelarSuscripcion(e){
     var accestoken= JSON.parse(localStorage.getItem("jwtresponse"));
     var tokenString=accestoken.accessToken+"";
