@@ -70,17 +70,10 @@ class TomarMedidaCliente extends React.Component {
       }
     };
     try {
-      let response = await fetch(BASE_URL + "/empleados/suscripciones", myInit);
-      if (response.status == 200) {
-        this.setState({ errores: 'Se ha registrado la subscripcion con exito a :' + this.state.documento })
+      let response = await fetch(BASE_URL + "/empleados/añadir-medida-cliente", myInit);
+      if (response.status == 201) {
+        this.setState({ errores: 'Se ha registrado la medida con exito a :' + this.state.documento })
       }
-      else if (response.status == 201) {
-        this.setState({ errores: 'Gracias por asistir' })
-      }
-      else if (response.status == 404) {
-        this.setState({ errores: 'La cedula del cliente que has ingresado no se ha registrado' });
-      }
-      console.log(response);
     }
     catch (e) {
       console.log("errores");
@@ -130,7 +123,7 @@ class TomarMedidaCliente extends React.Component {
         >
           <div className={classes.container}>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={5}>
+              <GridItem xs={12} sm={12} md={4}>
                 <Card className={classes[this.state.cardAnimaton]}>
                   <form
                     className={classes.form}
@@ -177,6 +170,7 @@ class TomarMedidaCliente extends React.Component {
                         <TextField
                           value={this.state.documento}
                           name="documento"
+
                           id="documento"
                           label="Cedula del Cliente"
                           formControlProps={{
@@ -194,6 +188,7 @@ class TomarMedidaCliente extends React.Component {
                           type="number"
                         />
                       </div>
+
                       <div style={{ display: "flex", justifyContent: "center" }}>
                         <TextField
                           id="idMedidaSpinner"
@@ -213,19 +208,24 @@ class TomarMedidaCliente extends React.Component {
                         >
                           {
                             this.state.tiposMedida.map((medida) => (
+
                               <MenuItem value={medida.idMedida}>{medida.nombre}</MenuItem>
                             ))
                           }
-                        </TextField>
+
+                        </TextField></div>
+
+                      <div style={{ display: "flex", justifyContent: "center" }}>
                         <TextField
+
                           autoFocus
-                          margin="dense"
+                          margin="normal"
                           name="valorMedida"
                           value={this.state.valorMedida}
                           label="Valor de la Medida"
                           type="number"
                           onChange={this.onChange}
-                          fullWidth
+
                         />
                       </div>
                       {
