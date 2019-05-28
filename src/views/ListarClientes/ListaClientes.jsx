@@ -13,38 +13,14 @@ import GridItem from "components/Grid/GridItem.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.jsx";
-import ClienteTable from "components/Tables/ClienteTable.jsx";
-
-
-
+import ClientesTable from "../../components/Tables/ClientesTable";
 const dashboardRoutes = [];
 
 class ListaClientes extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      clientes: []
-    };
-  }
-  async componentWillMount(){
-    var myInit =
-    {
-      method: 'GET',
-      headers: {
-      'Authorization': localStorage.getItem('token')
-      }
-    };
-    try{
-      let response= await fetch((BASE_URL + "/listar-clientes/0/100"),myInit);
-      let data= await response.json();
-      this.setState({clientes: data.content})
-    }
-    catch(e){
-      console.log(e);
-    }
   }
   render() {
-    const clientes = this.state.clientes;
     const  {classes,... rest}  = this.props;
     return (
       <div style={{ justifyContent: "center", alignItems: "center" }}>
@@ -64,9 +40,7 @@ class ListaClientes extends React.Component {
           <div className={classes.container}>
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
-
-                <h1>Mis Empleados</h1>
-
+                <h3>Mis Clientes</h3>
                 <br />
 
               </GridItem>
@@ -81,7 +55,7 @@ class ListaClientes extends React.Component {
             display: "flex"
           }}
         >
-          <h1> Lista De Empleados</h1>
+          <h2> Lista De Clientes</h2>
         </div>
         <div
           style={{
@@ -91,8 +65,7 @@ class ListaClientes extends React.Component {
             marginTop: "20px"
           }}
         >
-        <ClienteTable clientes={clientes}/>
-
+        <ClientesTable/>
         </div>
 
       </div>

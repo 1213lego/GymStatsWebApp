@@ -23,6 +23,7 @@ import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.
 import image from "assets/img/bg2gym.jpg";
 import { TextField, Input } from "@material-ui/core";
 import { validarToken, BASE_URL } from "../../index.js";
+import EmploysTable from "../../components/Tables/EmploysTable.js";
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -100,7 +101,7 @@ class RegisterPage extends React.Component {
       .then(response => {
         if(response.status==201)
         {
-          alert("Se ha registrado satisfatoriamente");
+          window.location.replace("http://localhost:3000/admin/mis-empleados");
         }
         else{
           alert("Ha fallado el registro");

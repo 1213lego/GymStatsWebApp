@@ -29,6 +29,7 @@ class HeaderLinks extends React.Component {
   onClickCerrarSesion(e) {
     localStorage.removeItem("token");
     localStorage.removeItem("jwtresponse");
+    window.location.replace("http://localhost:3000/login-page");
   }
   async componentWillMount() {
     console.log("de headerlink" + await validarToken())
@@ -187,6 +188,12 @@ function MenuEmpleado(props) {
           <Link to="/clientes" className={props.classes.dropdownLink}>
             Ver Mis clientes
              </Link>,
+             <Link to="/empleado/añadir-medidas" className={props.classes.dropdownLink}>
+            Añadir Tipo De Medida
+              </Link>,
+              <Link to="/empleado/tomar-medidas" className={props.classes.dropdownLink}>
+              Tomar Medidas a un cliente
+                </Link>,
           <a
             href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
             target="_blank"

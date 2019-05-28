@@ -13,8 +13,8 @@ import GridItem from "components/Grid/GridItem.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.jsx";
-import SuscripcionTable from "components/Tables/SuscripcionTable.jsx";
 import Button from "components/CustomButtons/Button.jsx";
+import SuscripcionesTable from "../../components/Tables/SuscripcionesTable";
 
 
 const dashboardRoutes = [];
@@ -123,7 +123,7 @@ class HistorialSuscripciones extends React.Component {
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
 
-                <h1>Mis Suscripciones</h1>
+                <h2>Mis Suscripciones</h2>
 
                 <br />
 
@@ -151,8 +151,7 @@ class HistorialSuscripciones extends React.Component {
             marginTop: "20px"
           }}
         >
-        <SuscripcionTable suscripciones={suscripciones}/>
-
+        <SuscripcionesTable></SuscripcionesTable>    
         </div>
 
       </div>

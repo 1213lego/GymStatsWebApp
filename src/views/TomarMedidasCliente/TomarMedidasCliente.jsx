@@ -18,22 +18,26 @@ import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
-import { Redirect } from 'react-router-dom' 
-import loginPageStyle from "assets/jss/material-kit-react/views/loginPage.jsx";
-
+import { Redirect } from 'react-router-dom'
+import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.jsx";
+import RDialog from "components/FormDialog/Dialogs/registrarAsistenciaDialog.jsx"
 import image from "assets/img/bggym.jpg";
-import { TextField } from "@material-ui/core";
 import { validarToken, BASE_URL } from "../../index.js";
+import { TextField,MenuItem,Input } from "@material-ui/core";
 
-class LoginPage extends React.Component {
+
+
+class TomarMedidaCliente extends React.Component {
   constructor(props) {
     super(props);
     // we use this to make the card to appear after the page has been rendered
     this.state = {
       cardAnimaton: "cardHidden",
-      username: '',
-      password: '',
-      autentico: false,
+     tiposMedida: [],
+     documento: null,
+     idMedida: null,
+     valorMedida: null,
+
       errores: ''
     };
     this.onChange = this.onChange.bind(this);
@@ -45,40 +49,41 @@ class LoginPage extends React.Component {
 
 async onSubmit(e) {
     e.preventDefault();
-    const login =
+    const registrarSubscripcioon =
     {
-      username: this.state.username,
-      password: this.state.password
+      cliente: {
+        documento:this.state.documento
+      },
+      tarifa: {
+        idTarifa: this.state.idTarifa
+    }
+
     };
+    console.log(registrarSubscripcioon);
     var myInit =
     {
       method: 'POST',
-      body: JSON.stringify(login),
+      body: JSON.stringify(registrarSubscripcioon),
       headers:
       {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
       }
     };
     try
     {
-      let response = await fetch(BASE_URL + "/login", myInit);
+      let response = await fetch(BASE_URL + "/empleados/añadir-medida-cliente", myInit);
       if (response.status == 200)
       {
-        let data= await response.json();
-        let token=data.token;
-        console.log("Autentico");
-        this.setState({ autentico: true });
-        localStorage.setItem("token", token.tokenType+" " + token.accessToken);
-        localStorage.setItem("jwtresponse",JSON.stringify(token));
-        console.log(localStorage.getItem("token"));
-        console.log(localStorage.getItem("jwtresponse"));
-        this.setState({autentico: true})
-        window.location.replace("http://localhost:3000");
+        this.setState({errores:'Se ha registrado las medidas con exito a :' + this.state.documento })
       }
-      else
+      else if(response.status==201)
       {
-        console.log("no autentico");
-        this.setState({ errores: 'Usuario o contraseña incorrectos' });
+        this.setState({errores:'Gracias por asistir' })
+      }
+      else if(response.status==404)
+      {
+        this.setState({errores:'La cedula del cliente que has ingresado no se ha registrado'});
       }
       console.log(response);
     }
@@ -88,7 +93,6 @@ async onSubmit(e) {
       console.log(e);
       this.setState({errores: e.message})
     }
-    console.log(await validarToken());
   }
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
@@ -99,20 +103,33 @@ async onSubmit(e) {
       700
     );
   }
+
+  async  componentWillMount()
+  {
+    try
+    {
+      let response = await fetch(BASE_URL + "/tipos-medida");
+      let data = await response.json();
+      this.setState({ tiposMedida: data });
+      console.log(data);
+    }
+    catch (e)
+    {
+      console.log("error " + e.message);
+    }
+  }
   render() {
     const errores = this.state.errores;
     const { classes, ...rest } = this.props;
     return (
       <div>
-        <Header
+      <Header
           absolute
           color="transparent"
           brand="GymStats"
-          rightLinks={
-            <HeaderLinks />
-        }
-        {...rest}
-      />
+          rightLinks={<HeaderLinks />}
+          {...rest}
+        />
       <div
         className={classes.pageHeader}
         style={{
@@ -131,7 +148,7 @@ async onSubmit(e) {
                     <CardHeader
                       color="primary"
                       className={classes.cardHeader}>
-                      <h4>Login</h4>
+                      <h4>Registrar Medidas De un Cliente</h4>
                     <div className={classes.socialLine}>
                       <Button
                         justIcon
@@ -163,20 +180,21 @@ async onSubmit(e) {
                     </div>
                   </CardHeader>
                   <p className={classes.divider}>
-                    Ingresa ahora y empieza a construir tu futuro
+                    Ingrese la cedula del cliente para registrar las medidas de un cliente
                   </p>
                   <CardBody>
+                  <div style={{display:"flex",justifyContent:"center"}}>
                     <TextField
-                      value={this.state.username}
-                      name="username"
-                      labelText="Nombre de Usuario..."
-                      id="username"
-                      label="username"
+                      value={this.state.documento}
+                      name="documento"
+
+                      id="documento"
+                      label="Cedula del Cliente"
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        type: "text",
+                        type: "number",
                         endAdornment: (
                           <InputAdornment position="end">
                             <People className={classes.inputIconsColor} />
@@ -184,29 +202,49 @@ async onSubmit(e) {
                       )
                     }}
                     onChange={this.onChange}
+                    type="number"
                   />
+                  </div>
 
+                  <div style={{display:"flex",justifyContent:"center"}}>
                   <TextField
-                    name="password"
-                    value={this.state.password}
-                    label="contraseña"
-                    labelText="Password..."
-                    id="pass"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      type: "password",
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Icon className={classes.inputIconsColor}>
-                            lock_outline
-                          </Icon>
-                        </InputAdornment>
-                      )
-                    }}
-                    onChange={this.onChange}
-                  />
+                      id="idMedidaSpinner"
+                      select
+                      label="Tipo de Medida"
+                      className={classes.textField}
+                      name="idMedida"
+                      margin="normal"
+                      value={this.state.idMedida}
+                      onChange={this.onChange}
+                      SelectProps={{
+                        MenuProps: {
+                          className: classes.menu,
+                        },
+                      }}
+                      input={<Input name="idTarifa" id="idTarifa" />}
+                      >
+                      {
+                        this.state.tiposMedida.map((medida) => (
+
+                          <MenuItem value={medida.idMedida}>{medida.nombre}</MenuItem>
+                        ))
+                      }
+
+                      </TextField></div>
+                     
+                     <div style={{display:"flex",justifyContent:"center"}}>
+                     <TextField
+                     
+              autoFocus
+              margin="normal"
+              name="valorMedida"
+              value={this.state.valorMedida}
+              label="Valor de la Medida"
+              type="number"
+              onChange={this.onChange}
+              
+            />
+                  </div>
                   {
                     <p className={classes.divider}>
                       {errores}
@@ -214,13 +252,7 @@ async onSubmit(e) {
                   }
                 </CardBody>
                 <CardFooter className={classes.cardFooter}>
-                  <Button
-                    type="submit"
-                    simple
-                    color="primary"
-                    size="lg">
-                    Inicia Sesión
-                  </Button>
+                  <RDialog nombreBtn="Registrar Subscripcion"mensaje ={errores}/>
                 </CardFooter>
               </form>
             </Card>
@@ -229,9 +261,9 @@ async onSubmit(e) {
       </div>
       <Footer whiteFont />
   </div>
-</div>
+  </div>
 );
 }
 }
 
-export default withStyles(loginPageStyle)(LoginPage);
+export default withStyles(registerPageStyle)(TomarMedidaCliente);
