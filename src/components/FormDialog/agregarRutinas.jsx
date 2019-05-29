@@ -58,24 +58,25 @@ class FormDialog extends React.Component {
 
   async onSubmit(e){
     e.preventDefault();
-    const tipoMedida= {
-      descripcion: this.state.descripcion,
-      nombre: this.state.nombre
+    const rutinas= {
+      descripcionRutina: this.state.descripcion,
+      nombreRutina: this.state.nombre
     };
     var myInit =
     {
         method: 'POST',
-        body: JSON.stringify(tipoMedida),headers:{
+        body: JSON.stringify(rutinas),headers:{
           'Content-Type': 'application/json',
           'Authorization': localStorage.getItem('token')
         }
     };
-    let reponse = await fetch(BASE_URL+"/empleados/tipos-medida",myInit);
+    let reponse = await fetch(BASE_URL+"/empleados/rutinas",myInit);
+    console.log(reponse)
     if(reponse.status==201){
       window.location.reload();
     }
     else{
-      alert("No se guardo el tipo de medida")
+      alert("No se guardo la rutina")
     }
   }
   handleClickOpen = () => {
@@ -92,7 +93,7 @@ class FormDialog extends React.Component {
       <Fragment>
       <div style={{marginTop:"40px"}}>
       <Button variant="raised" color="#d39539" onClick={this.handleClickOpen}>
-          <h4>Añadir Tipo De Medida</h4>
+          <h4>Añadir Rutina</h4>
         </Button>
         </div>
         <Dialog
@@ -100,18 +101,18 @@ class FormDialog extends React.Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title" style={{justifyContent:"center",alignItems:"center",display:"flex "}}>Añadir Tipo Medida</DialogTitle>
+          <DialogTitle id="form-dialog-title" style={{justifyContent:"center",alignItems:"center",display:"flex "}}>Agregar Rutinas</DialogTitle>
           <form onSubmit={this.onSubmit}>
           <DialogContent>
             <DialogContentText>
-                Rellenar el formulario para añadir un tipo de medida a la base de datos
+                Rellenar el formulario para agregar una rutina a la base de datos
             </DialogContentText>
             <TextField
               autoFocus
               color="#d39539"
               margin="dense"
               name="nombre"
-              label="Nombre Del Tipo de la Medida"
+              label="Nombre De La Rutina"
               type="text"
               onChange={this.onChange}
               fullWidth
@@ -131,7 +132,7 @@ class FormDialog extends React.Component {
               Cancelar
             </Button>
             <Button onSubmit onClick={this.handleClose} color="primary" variant="raised" type="submit">
-              Añadir Tipo De Medida
+              Añadir Rutina
             </Button>
           </DialogActions>
           </form>

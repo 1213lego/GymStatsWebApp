@@ -1,5 +1,5 @@
 import React from "react";
-import TipoMedidaCard from "components/CardTipoMedida/TipoMedidaCard.jsx";
+import CardRutinas from "components/CardRutinas/CardRutinas.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import { BASE_URL } from "../../..";
@@ -8,22 +8,22 @@ class Tarifas extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tiposMedida: []
+      rutinas: []
     };
   }
 
   async componentWillMount() {
     try {
-      let response = await fetch(BASE_URL + "/tipos-medida");
+      let response = await fetch(BASE_URL + "/empleados/rutinas");
       let data = await response.json();
-      this.setState({ tiposMedida: data });
       console.log(data);
+      this.setState({ rutinas: data});
     } catch (e) {
-      console.log("Tarifas.jsx e: " + e.message);
+      console.log(e);
     }
   }
   render() {
-    const tiposMedida = this.state.tiposMedida;
+    const rutinas = this.state.rutinas;
     return (
       <div style={{ justifyContent: "center", alignItems: "center" }}>
         <div
@@ -34,7 +34,7 @@ class Tarifas extends React.Component {
             display: "flex"
           }}
         >
-          <h1> Tipos De Medidas</h1>
+          <h1> Rutinas</h1>
         </div>
         <div
           style={{
@@ -45,12 +45,9 @@ class Tarifas extends React.Component {
           }}
         >
           <GridContainer justify="center" alignItems="center">
-            {tiposMedida.map(tiposMedida => (
+            {rutinas.map(rutina=>(
               <GridItem xs={14} sm={4} md={4} lg={2}>
-                <TipoMedidaCard
-                  key={tiposMedida.id}
-                  tiposMedida={tiposMedida}
-                />
+              <CardRutinas key={rutina.id} rutina={rutina}/>
               </GridItem>
             ))}
           </GridContainer>
