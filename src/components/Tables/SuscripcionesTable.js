@@ -10,7 +10,7 @@ class SuscripcionesTable extends React.Component {
   render() {
     return (
       <MaterialTable
-        title="Remote Data Preview"
+        title=""
         columns={[
           { title: 'Fecha inicio', field: 'fechaInicio' },
           { title: 'Fecha fin', field: 'fechaFin' },

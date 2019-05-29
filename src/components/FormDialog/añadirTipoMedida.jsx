@@ -11,7 +11,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Add from '@material-ui/icons/Add'
 import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.jsx";
-import {BASE_URL}  from "../../index.js"
+import {BASE_URL, MainSwal}  from "../../index.js"
 
 const styles = theme => ({
   container: {
@@ -69,10 +69,24 @@ class FormDialog extends React.Component {
     };
     let reponse = await fetch(BASE_URL+"/empleados/tipos-medida",myInit);
     if(reponse.status==201){
-      window.location.reload();
+      MainSwal.fire({
+        position: 'top-end',
+        type: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
     else{
-      alert("No se guardo el tipo de medida")
+      MainSwal.fire(
+        {
+          position: 'top-end',
+          type: 'error',
+          title: 'Something went wrong!',
+          showConfirmButton: false,
+          timer: 1500
+        }
+      )
     }
   }
   handleClickOpen = () => {
@@ -97,7 +111,7 @@ class FormDialog extends React.Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title" style={{justifyContent:"center",alignItems:"center",display:"flex "}}>Añadir Maquina</DialogTitle>
+          <DialogTitle id="form-dialog-title" style={{justifyContent:"center",alignItems:"center",display:"flex "}}>Añadir Tipo Medida</DialogTitle>
           <form onSubmit={this.onSubmit}>
           <DialogContent>
             <DialogContentText>

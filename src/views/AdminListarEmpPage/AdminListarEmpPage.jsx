@@ -36,7 +36,7 @@ class AdminListarEmpPage extends React.Component {
           <div className={classes.container}>
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
-                <h3>Mis Empleados</h3>
+                <h2>Mis Empleados</h2>
                 <br />
               </GridItem>
             </GridContainer>

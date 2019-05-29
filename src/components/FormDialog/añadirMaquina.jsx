@@ -11,7 +11,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Add from '@material-ui/icons/Add'
 import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.jsx";
-import {BASE_URL}  from "../../index.js"
+import {BASE_URL, MainSwal}  from "../../index.js"
 
 const styles = theme => ({
   container: {
@@ -93,10 +93,26 @@ class FormDialog extends React.Component {
       console.log(response);
       if(response.status==201)
       {
-        alert("Se ha registrado satisfatoriamente la maquina");
+        MainSwal.fire(
+          {
+            position: 'top-end',
+        type: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+          }
+        )
       }
       else{
-        alert("Ha fallado el registro");
+        MainSwal.fire(
+          {
+            position: 'top-end',
+            type: 'error',
+            title: 'Something went wrong!',
+            showConfirmButton: false,
+            timer: 1500
+          }
+        )
       }
       return response.json();
     }).then(data=>{console.log(data)});

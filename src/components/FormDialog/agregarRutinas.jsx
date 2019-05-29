@@ -1,4 +1,4 @@
-import React,{Fragment} from 'react';
+import React, { Fragment } from 'react';
 import classNames from "classnames";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from '@material-ui/core/Button';
@@ -11,7 +11,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Add from '@material-ui/icons/Add'
 import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.jsx";
-import {BASE_URL, MainSwal}  from "../../index.js"
+import { BASE_URL, MainSwal } from "../../index.js"
 
 const styles = theme => ({
   container: {
@@ -25,8 +25,7 @@ const styles = theme => ({
   },
 });
 
-function todayDate()
-{
+function todayDate() {
   var today;
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -37,8 +36,7 @@ function todayDate()
 
 class FormDialog extends React.Component {
 
-  constructor(props)
-  {
+  constructor(props) {
     super(props);
     this.state = {
       open: false,
@@ -53,34 +51,39 @@ class FormDialog extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  async onSubmit(e){
+  async onSubmit(e) {
     e.preventDefault();
-    const rutinas= {
+    const rutinas = {
       descripcionRutina: this.state.descripcion,
       nombreRutina: this.state.nombre
     };
     var myInit =
     {
-        method: 'POST',
-        body: JSON.stringify(rutinas),headers:{
-          'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem('token')
-        }
+      method: 'POST',
+      body: JSON.stringify(rutinas), headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }
     };
-    let reponse = await fetch(BASE_URL+"/empleados/rutinas",myInit);
+    let reponse = await fetch(BASE_URL + "/empleados/rutinas", myInit);
     console.log(reponse)
-    if(reponse.status==201){
-      MainSwal.fire(
-        'Good job!',
-        'You clicked the button!',
-        'success'
+    if (reponse.status == 201) {
+      MainSwal.fire({
+        position: 'top-end',
+        type: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+      }
       );
     }
-    else{
+    else {
       MainSwal.fire({
+        position: 'top-end',
         type: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!'
+        title: 'Something went wrong!',
+        showConfirmButton: false,
+        timer: 1500
       })
     }
   }
@@ -93,53 +96,53 @@ class FormDialog extends React.Component {
   };
 
   render() {
-      const {classes} = this.props;
+    const { classes } = this.props;
     return (
       <Fragment>
-      <div style={{marginTop:"40px"}}>
-      <Button variant="raised" color="#d39539" onClick={this.handleClickOpen}>
-          <h4>Añadir Rutina</h4>
-        </Button>
+        <div style={{ marginTop: "40px" }}>
+          <Button variant="raised" color="#d39539" onClick={this.handleClickOpen}>
+            <h4>Añadir Rutina</h4>
+          </Button>
         </div>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title" style={{justifyContent:"center",alignItems:"center",display:"flex "}}>Añadir Maquina</DialogTitle>
+          <DialogTitle id="form-dialog-title" style={{ justifyContent: "center", alignItems: "center", display: "flex " }}>Agregar Rutinas</DialogTitle>
           <form onSubmit={this.onSubmit}>
-          <DialogContent>
-            <DialogContentText>
+            <DialogContent>
+              <DialogContentText>
                 Rellenar el formulario para agregar una rutina a la base de datos
             </DialogContentText>
-            <TextField
-              autoFocus
-              color="#d39539"
-              margin="dense"
-              name="nombre"
-              label="Nombre De La Rutina"
-              type="text"
-              onChange={this.onChange}
-              fullWidth
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              name="descripcion"
-              label="Descripcion"
-              type="text"
-              onChange={this.onChange}
-              fullWidth
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancelar
+              <TextField
+                autoFocus
+                color="#d39539"
+                margin="dense"
+                name="nombre"
+                label="Nombre De La Rutina"
+                type="text"
+                onChange={this.onChange}
+                fullWidth
+              />
+              <TextField
+                autoFocus
+                margin="dense"
+                name="descripcion"
+                label="Descripcion"
+                type="text"
+                onChange={this.onChange}
+                fullWidth
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Cancelar
             </Button>
-            <Button onSubmit onClick={this.handleClose} color="primary" variant="raised" type="submit">
-              Añadir Rutina
+              <Button onSubmit onClick={this.handleClose} color="primary" variant="raised" type="submit">
+                Añadir Rutina
             </Button>
-          </DialogActions>
+            </DialogActions>
           </form>
         </Dialog>
       </Fragment>

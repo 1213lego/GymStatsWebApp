@@ -45,7 +45,7 @@ class AdminTarifasPage extends React.Component {
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
 
-                <h1>Modulo Agregar Tarifas</h1>
+                <h2>Modulo Agregar Tarifas</h2>
                 <br />
               </GridItem>
             </GridContainer>

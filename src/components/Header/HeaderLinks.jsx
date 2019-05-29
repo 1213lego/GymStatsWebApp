@@ -65,6 +65,8 @@ class HeaderLinks extends React.Component {
           </Link>
           </ListItem> : <ListItem className={classes.listItem}> </ListItem>
         }
+    
+
         <ListItem className={classes.listItem}>
           <Tooltip
             id="instagram-twitter"
@@ -118,22 +120,56 @@ class HeaderLinks extends React.Component {
         </ListItem>
         {
           pTipo != '' ? <ListItem className={classes.listItem}>
-            <Link to="/" onClick={this.onClickCerrarSesion} className={classes.navLink}>
-              Cerrar sesion
-            </Link>
-          </ListItem> : <ListItem className={classes.listItem}> </ListItem>
+    <CustomDropdown
+        noLiPadding
+        buttonText={localStorage.getItem("usuarioActual")}
+        buttonProps={{
+          className: classes.navLink,
+          color: "transparent"
+        }}
+        buttonIcon={Apps}
+        dropdownList={[
+          <Link to="/" className={classes.dropdownLink}>
+            {"Documento " + localStorage.getItem("documento")}
+            </Link>,
+          <Link to="/" onClick={this.onClickCerrarSesion} className={classes.dropdownLink}>
+            Cerrar sesión
+            </Link>,        
+        ]}
+      />
+        </ListItem> : <ListItem className={classes.listItem}> </ListItem>
         }
       </List>
     );
   }
 }
-
+function Menu(props){
+  return( <ListItem className={props.classes.listItem}>
+    <CustomDropdown
+        noLiPadding
+        buttonText="Usuario"
+        buttonProps={{
+          className: props.classes.navLink,
+          color: "transparent"
+        }}
+        buttonIcon={<FontAwesomeIcon icon="stroopwafel" />}
+        dropdownList={[
+          <Link to="/" className={props.classes.dropdownLink}>
+            Ver perfil
+            </Link>,
+          <Link to="/" onClick={this.onClickCerrarSesion} className={props.classes.dropdownLink}>
+            Cerrar sesión
+            </Link>,        
+        ]}
+      />
+        </ListItem>);
+}
 function MenuAdmin(props) {
   return (
     <ListItem className={props.classes.listItem}>
       <CustomDropdown
         noLiPadding
-        buttonText="Admin"
+        buttonText="Opciones"
         buttonProps={{
           className: props.classes.navLink,
           color: "transparent"
@@ -178,7 +214,7 @@ function MenuEmpleado(props) {
     <ListItem className={props.classes.listItem}>
       <CustomDropdown
         noLiPadding
-        buttonText="Empleado"
+        buttonText="Opciones"
         buttonProps={{
           className: props.classes.navLink,
           color: "transparent"
@@ -225,7 +261,7 @@ function MenuCliente(props) {
     <ListItem className={props.classes.listItem}>
       <CustomDropdown
         noLiPadding
-        buttonText="Cliente"
+        buttonText="Opciones"
         buttonProps={{
           className: props.classes.navLink,
           color: "transparent"
@@ -264,6 +300,7 @@ function MenuGeneral(props) {
         </Link>
 
       </ListItem>
+
       <ListItem className={props.classes.listItem}>
         <Tooltip
           id="instagram-twitter"
