@@ -204,6 +204,9 @@ function MenuEmpleado(props) {
           <Link to="/asistencia-clientes" className={props.classes.dropdownLink}>
             Asistencias clientes
                 </Link>,
+            <Link to="/empleado/agregar-rutinas" className={props.classes.dropdownLink}>
+            Agregar Rutinas
+              </Link>,
           <a
             href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
             target="_blank"

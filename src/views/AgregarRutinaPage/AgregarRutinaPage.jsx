@@ -14,16 +14,23 @@ import GridItem from "components/Grid/GridItem.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
-import AñadirMaquina from "components/FormDialog/añadirMaquina.jsx";
-import Maquinas from "../Components/Sections/Maquinas.jsx"
+import AgregarRutinas from "components/FormDialog/agregarRutinas.jsx";
+import Rutinas from "../Components/Sections/Rutinas.jsx";
 import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.jsx";
-
 // Sections for this page
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
 const dashboardRoutes = [];
 
 class AdminTarifasPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    }
+  }
   render() {
     const { classes, ...rest } = this.props;
     return (
@@ -40,12 +47,12 @@ class AdminTarifasPage extends React.Component {
           }}
           {...rest}
         />
-        <Parallax filter image={require("assets/img/maquinaimage.jpg")}>
+        <Parallax filter image={require("assets/img/rutinas.jpg")}>
           <div className={classes.container}>
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
 
-                <h1>Modulo Añadir Maquinas</h1>
+                <h3>Modulo Agregar Rutinas</h3>
                 <br />
 
               </GridItem>
@@ -54,13 +61,13 @@ class AdminTarifasPage extends React.Component {
         </Parallax>
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
-            <div style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
-            <AñadirMaquina/>
+            <div style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
+              <AgregarRutinas />
             </div>
           </div>
-          <Maquinas/>
+          <Rutinas />
         </div>
-  </div>
+      </div>
     );
   }
 }
