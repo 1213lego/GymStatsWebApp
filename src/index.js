@@ -21,7 +21,7 @@ import HistorialSuscripciones from "views/HistorialSuscripciones/HistorialSuscri
 import EmployerTipoMedidaPage from "views/EmployerTipoMedidaPage/EmployerTipoMedidaPage.jsx";
 import TomarMedidasCliente from "views/TomarMedidasCliente/TomarMedidasCliente.jsx"
 var hist = createBrowserHistory();
-export const BASE_URL = "http://10.30.9.125:8080";
+export const BASE_URL = "http://localhost:8080";
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
