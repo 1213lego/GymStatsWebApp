@@ -23,11 +23,7 @@ import TomarMedidasCliente from "views/TomarMedidasCliente/TomarMedidasCliente.j
 import AgregarRutinaPage from "views/AgregarRutinaPage/AgregarRutinaPage.jsx";
 
 var hist = createBrowserHistory();
-<<<<<<< HEAD
-export const BASE_URL = "http://localhost:8080";
-=======
 export const BASE_URL = "http://10.30.4.52:8080";
->>>>>>> 364ce4db71f0c368e6ec52cfdf101340ca75c7a6
 ReactDOM.render(
   <Router history={hist}>
     <Switch>

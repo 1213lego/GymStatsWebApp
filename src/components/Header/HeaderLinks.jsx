@@ -73,7 +73,7 @@ class HeaderLinks extends React.Component {
           className: classes.navLink,
           color: "transparent"
         }}
-        buttonIcon={Apps}
+        
         dropdownList={[
           <Link to="/" className={classes.dropdownLink}>
             Ver perfil
