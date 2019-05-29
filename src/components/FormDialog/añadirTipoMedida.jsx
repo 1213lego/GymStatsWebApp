@@ -100,7 +100,7 @@ class FormDialog extends React.Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title" style={{justifyContent:"center",alignItems:"center",display:"flex "}}>Añadir Maquina</DialogTitle>
+          <DialogTitle id="form-dialog-title" style={{justifyContent:"center",alignItems:"center",display:"flex "}}>Añadir Tipo Medida</DialogTitle>
           <form onSubmit={this.onSubmit}>
           <DialogContent>
             <DialogContentText>
