@@ -45,7 +45,7 @@ class AdminTarifasPage extends React.Component {
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
 
-                <h1>Modulo Añadir Tipos De Medida</h1>
+                <h2>Modulo Añadir Tipos De Medida</h2>
                 <br />
 
               </GridItem>

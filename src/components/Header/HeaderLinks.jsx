@@ -65,6 +65,7 @@ class HeaderLinks extends React.Component {
           </Link>
           </ListItem> : <ListItem className={classes.listItem}> </ListItem>
         }
+<<<<<<< HEAD
     <ListItem className={classes.listItem}>
     <CustomDropdown
         noLiPadding
@@ -84,6 +85,9 @@ class HeaderLinks extends React.Component {
         ]}
       />
         </ListItem>
+=======
+    
+>>>>>>> 9af59b6fd3c23927644aae5daf16e09d19065b4d
 
         <ListItem className={classes.listItem}>
           <Tooltip
@@ -138,19 +142,52 @@ class HeaderLinks extends React.Component {
         </ListItem>
         {
           pTipo != '' ? <ListItem className={classes.listItem}>
-            <Link to="/" onClick={this.onClickCerrarSesion} className={classes.navLink}>
-              Cerrar sesion
-            </Link>
-          </ListItem> : <ListItem className={classes.listItem}> </ListItem>
+    <CustomDropdown
+        noLiPadding
+        buttonText={localStorage.getItem("usuarioActual")}
+        buttonProps={{
+          className: classes.navLink,
+          color: "transparent"
+        }}
+        buttonIcon={Apps}
+        dropdownList={[
+          <Link to="/" className={classes.dropdownLink}>
+            {"Documento " + localStorage.getItem("documento")}
+            </Link>,
+          <Link to="/" onClick={this.onClickCerrarSesion} className={classes.dropdownLink}>
+            Cerrar sesión
+            </Link>,        
+        ]}
+      />
+        </ListItem> : <ListItem className={classes.listItem}> </ListItem>
         }
       </List>
     );
   }
 }
-
+function Menu(props){
+  return( <ListItem className={props.classes.listItem}>
+    <CustomDropdown
+        noLiPadding
+        buttonText="Usuario"
+        buttonProps={{
+          className: props.classes.navLink,
+          color: "transparent"
+        }}
+        buttonIcon={<FontAwesomeIcon icon="stroopwafel" />}
+        dropdownList={[
+          <Link to="/" className={props.classes.dropdownLink}>
+            Ver perfil
+            </Link>,
+          <Link to="/" onClick={this.onClickCerrarSesion} className={props.classes.dropdownLink}>
+            Cerrar sesión
+            </Link>,        
+        ]}
+      />
+        </ListItem>);
+}
 function MenuAdmin(props) {
   return (
-    <div>
     <ListItem className={props.classes.listItem}>
       <CustomDropdown
         noLiPadding
@@ -176,6 +213,12 @@ function MenuAdmin(props) {
           <Link to="/clientes" className={props.classes.dropdownLink}>
             Ver Mis clientes
              </Link>,
+          <Link to="/admin/asistencia-empleados" className={props.classes.dropdownLink}>
+            Asistencias empleados
+                </Link>,
+          <Link to="/asistencia-clientes" className={props.classes.dropdownLink}>
+            Asistencias clientes
+                </Link>,
           <a
             href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
             target="_blank"
@@ -186,32 +229,10 @@ function MenuAdmin(props) {
         ]}
       />
     </ListItem>
-    <ListItem className={props.classes.listItem}>
-    <CustomDropdown
-        noLiPadding
-        buttonText="Usuario"
-        buttonProps={{
-          className: props.classes.navLink,
-          color: "transparent"
-        }}
-        buttonIcon={Apps}
-        dropdownList={[
-          <Link to="/" className={props.classes.dropdownLink}>
-            Ver perfil
-            </Link>,
-          <Link to="/" className={props.classes.dropdownLink}>
-            Cerrar sesión
-            </Link>,        
-        ]}
-      />
-        </ListItem>
-    
-    </div>
   );
 }
 function MenuEmpleado(props) {
   return (
-   <div>
     <ListItem className={props.classes.listItem}>
       <CustomDropdown
         noLiPadding
@@ -231,11 +252,15 @@ function MenuEmpleado(props) {
           <Link to="/clientes" className={props.classes.dropdownLink}>
             Ver Mis clientes
              </Link>,
-             <Link to="/empleado/añadir-medidas" className={props.classes.dropdownLink}>
+          <Link to="/empleado/añadir-medidas" className={props.classes.dropdownLink}>
             Añadir Tipo De Medida
               </Link>,
-              <Link to="/empleado/tomar-medidas" className={props.classes.dropdownLink}>
-              Tomar Medidas a un cliente
+          <Link to="/empleado/tomar-medidas" className={props.classes.dropdownLink}>
+            Tomar Medidas a un cliente
+                </Link>,
+          ,
+          <Link to="/asistencia-clientes" className={props.classes.dropdownLink}>
+            Asistencias clientes
                 </Link>,
             <Link to="/empleado/agregar-rutinas" className={props.classes.dropdownLink}>
             Agregar Rutinas
@@ -250,33 +275,11 @@ function MenuEmpleado(props) {
         ]}
       />
     </ListItem>
-    
-    <ListItem className={props.classes.listItem}>
-    <CustomDropdown
-        noLiPadding
-        buttonText="Empleado"
-        buttonProps={{
-          className: props.classes.navLink,
-          color: "transparent"
-        }}
-        buttonIcon={Apps}
-        dropdownList={[
-          <Link to="/" className={props.classes.dropdownLink}>
-            Ver perfil
-            </Link>,
-          <Link to="/" className={props.classes.dropdownLink}>
-            Cerrar sesión
-            </Link>,        
-        ]}
-      />
-        </ListItem>
-    </div>
   );
 }
 
 function MenuCliente(props) {
   return (
-    <div>
     <ListItem className={props.classes.listItem}>
       <CustomDropdown
         noLiPadding
@@ -303,26 +306,6 @@ function MenuCliente(props) {
         ]}
       />
     </ListItem>
-    <ListItem className={props.classes.listItem}>
-    <CustomDropdown
-        noLiPadding
-        buttonText="Cliente"
-        buttonProps={{
-          className: props.classes.navLink,
-          color: "transparent"
-        }}
-        buttonIcon={Apps}
-        dropdownList={[
-          <Link to="/" className={props.classes.dropdownLink}>
-            Ver perfil
-            </Link>,
-          <Link to="/" className={props.classes.dropdownLink}>
-            Cerrar sesión
-            </Link>,        
-        ]}
-      />
-        </ListItem>
-    </div>
   );
 }
 function MenuGeneral(props) {

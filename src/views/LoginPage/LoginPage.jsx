@@ -68,6 +68,8 @@ async onSubmit(e) {
         let token=data.token;
         console.log("Autentico");
         this.setState({ autentico: true });
+        localStorage.setItem("usuarioActual",data.usuario.nombres +" " +data.usuario.apellidos);
+        localStorage.setItem("documento",data.usuario.documento);
         localStorage.setItem("token", token.tokenType+" " + token.accessToken);
         localStorage.setItem("jwtresponse",JSON.stringify(token));
         console.log(localStorage.getItem("token"));

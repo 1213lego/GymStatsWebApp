@@ -17,13 +17,20 @@ import Parallax from "components/Parallax/Parallax.jsx";
 import AgregarRutinas from "components/FormDialog/agregarRutinas.jsx";
 import Rutinas from "../Components/Sections/Rutinas.jsx";
 import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.jsx";
-
 // Sections for this page
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
 const dashboardRoutes = [];
 
 class AdminTarifasPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    }
+  }
   render() {
     const { classes, ...rest } = this.props;
     return (
@@ -45,7 +52,7 @@ class AdminTarifasPage extends React.Component {
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
 
-                <h3>Modulo Agregar Rutinas</h3>
+                <h2>Modulo Agregar Rutinas</h2>
                 <br />
 
               </GridItem>
@@ -54,13 +61,13 @@ class AdminTarifasPage extends React.Component {
         </Parallax>
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
-            <div style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
-            <AgregarRutinas/>
+            <div style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
+              <AgregarRutinas />
             </div>
           </div>
-          <Rutinas/>
+          <Rutinas />
         </div>
-  </div>
+      </div>
     );
   }
 }

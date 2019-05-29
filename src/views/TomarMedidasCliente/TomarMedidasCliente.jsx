@@ -23,21 +23,17 @@ import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.
 import RDialog from "components/FormDialog/Dialogs/registrarAsistenciaDialog.jsx"
 import image from "assets/img/bggym.jpg";
 import { validarToken, BASE_URL } from "../../index.js";
-import { TextField,MenuItem,Input } from "@material-ui/core";
-
-
-
+import { TextField, MenuItem, Input } from "@material-ui/core";
 class TomarMedidaCliente extends React.Component {
   constructor(props) {
     super(props);
     // we use this to make the card to appear after the page has been rendered
     this.state = {
       cardAnimaton: "cardHidden",
-     tiposMedida: [],
-     documento: null,
-     idMedida: null,
-     valorMedida: null,
-
+      tiposMedida: [],
+      documento: null,
+      idMedida: null,
+      valorMedida: null,
       errores: ''
     };
     this.onChange = this.onChange.bind(this);
@@ -47,51 +43,39 @@ class TomarMedidaCliente extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-async onSubmit(e) {
+  async onSubmit(e) {
     e.preventDefault();
-    const registrarSubscripcioon =
+    const nuevaMedidaCliente =
     {
+      valorMedida: this.state.valorMedida,
       cliente: {
-        documento:this.state.documento
+        documento: this.state.documento
       },
-      tarifa: {
-        idTarifa: this.state.idTarifa
-    }
-
+      tiposMedida: {
+        idMedida: this.state.idMedida
+      }
     };
-    console.log(registrarSubscripcioon);
+    console.log(nuevaMedidaCliente);
     var myInit =
     {
       method: 'POST',
-      body: JSON.stringify(registrarSubscripcioon),
+      body: JSON.stringify(nuevaMedidaCliente),
       headers:
       {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
       }
     };
-    try
-    {
+    try {
       let response = await fetch(BASE_URL + "/empleados/añadir-medida-cliente", myInit);
-      if (response.status == 200)
-      {
-        this.setState({errores:'Se ha registrado las medidas con exito a :' + this.state.documento })
+      if (response.status == 201) {
+        this.setState({ errores: 'Se ha registrado la medida con exito a :' + this.state.documento })
       }
-      else if(response.status==201)
-      {
-        this.setState({errores:'Gracias por asistir' })
-      }
-      else if(response.status==404)
-      {
-        this.setState({errores:'La cedula del cliente que has ingresado no se ha registrado'});
-      }
-      console.log(response);
     }
-    catch (e)
-    {
+    catch (e) {
       console.log("errores");
       console.log(e);
-      this.setState({errores: e.message})
+      this.setState({ errores: e.message })
     }
   }
   componentDidMount() {
@@ -104,17 +88,13 @@ async onSubmit(e) {
     );
   }
 
-  async  componentWillMount()
-  {
-    try
-    {
+  async  componentWillMount() {
+    try {
       let response = await fetch(BASE_URL + "/tipos-medida");
       let data = await response.json();
       this.setState({ tiposMedida: data });
-      console.log(data);
     }
-    catch (e)
-    {
+    catch (e) {
       console.log("error " + e.message);
     }
   }
@@ -123,20 +103,20 @@ async onSubmit(e) {
     const { classes, ...rest } = this.props;
     return (
       <div>
-      <Header
+        <Header
           absolute
           color="transparent"
           brand="GymStats"
           rightLinks={<HeaderLinks />}
           {...rest}
         />
-      <div
-        className={classes.pageHeader}
-        style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center"
-        }}
+        <div
+          className={classes.pageHeader}
+          style={{
+            backgroundImage: "url(" + image + ")",
+            backgroundSize: "cover",
+            backgroundPosition: "top center"
+          }}
         >
           <div className={classes.container}>
             <GridContainer justify="center">
@@ -149,121 +129,120 @@ async onSubmit(e) {
                       color="primary"
                       className={classes.cardHeader}>
                       <h4>Registrar Medidas De un Cliente</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
+                      <div className={classes.socialLine}>
+                        <Button
+                          justIcon
+                          href="#pablo"
+                          target="_blank"
+                          color="transparent"
+                          onClick={e => e.preventDefault()}
                         >
                           <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
+                        </Button>
+                        <Button
+                          justIcon
+                          href="#pablo"
+                          target="_blank"
+                          color="transparent"
+                          onClick={e => e.preventDefault()}
                         >
                           <i className={"fab fa-facebook"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
+                        </Button>
+                        <Button
+                          justIcon
+                          href="#pablo"
+                          target="_blank"
+                          color="transparent"
+                          onClick={e => e.preventDefault()}
                         >
                           <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <p className={classes.divider}>
-                    Ingrese la cedula del cliente para registrar las medidas de un cliente
-                  </p>
-                  <CardBody>
-                  <div style={{display:"flex",justifyContent:"center"}}>
-                    <TextField
-                      value={this.state.documento}
-                      name="documento"
-
-                      id="documento"
-                      label="Cedula del Cliente"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "number",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
-                        </InputAdornment>
-                      )
-                    }}
-                    onChange={this.onChange}
-                    type="number"
-                  />
-                  </div>
-
-                  <div style={{display:"flex",justifyContent:"center"}}>
-                  <TextField
-                      id="idMedidaSpinner"
-                      select
-                      label="Tipo de Medida"
-                      className={classes.textField}
-                      name="idMedida"
-                      margin="normal"
-                      value={this.state.idMedida}
-                      onChange={this.onChange}
-                      SelectProps={{
-                        MenuProps: {
-                          className: classes.menu,
-                        },
-                      }}
-                      input={<Input name="idTarifa" id="idTarifa" />}
-                      >
-                      {
-                        this.state.tiposMedida.map((medida) => (
-
-                          <MenuItem value={medida.idMedida}>{medida.nombre}</MenuItem>
-                        ))
-                      }
-
-                      </TextField></div>
-                     
-                     <div style={{display:"flex",justifyContent:"center"}}>
-                     <TextField
-                     
-              autoFocus
-              margin="normal"
-              name="valorMedida"
-              value={this.state.valorMedida}
-              label="Valor de la Medida"
-              type="number"
-              onChange={this.onChange}
-              
-            />
-                  </div>
-                  {
+                        </Button>
+                      </div>
+                    </CardHeader>
                     <p className={classes.divider}>
-                      {errores}
-                    </p>
-                  }
-                </CardBody>
-                <CardFooter className={classes.cardFooter}>
-                  <RDialog nombreBtn="Registrar Subscripcion"mensaje ={errores}/>
-                </CardFooter>
-              </form>
-            </Card>
-          </GridItem>
-        </GridContainer>
-      </div>
-      <Footer whiteFont />
-  </div>
-  </div>
-);
-}
-}
+                      Ingrese la cedula del cliente para registrar las medidas de un cliente
+                  </p>
+                    <CardBody>
+                      <div style={{ display: "flex", justifyContent: "center" }}>
+                        <TextField
+                          value={this.state.documento}
+                          name="documento"
 
+                          id="documento"
+                          label="Cedula del Cliente"
+                          formControlProps={{
+                            fullWidth: true
+                          }}
+                          inputProps={{
+                            type: "number",
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <People className={classes.inputIconsColor} />
+                              </InputAdornment>
+                            )
+                          }}
+                          onChange={this.onChange}
+                          type="number"
+                        />
+                      </div>
+
+                      <div style={{ display: "flex", justifyContent: "center" }}>
+                        <TextField
+                          id="idMedidaSpinner"
+                          select
+                          label="Tipo de Medida"
+                          className={classes.textField}
+                          name="idMedida"
+                          margin="normal"
+                          value={this.state.idMedida}
+                          onChange={this.onChange}
+                          SelectProps={{
+                            MenuProps: {
+                              className: classes.menu,
+                            },
+                          }}
+                          input={<Input name="idTarifa" id="idTarifa" />}
+                        >
+                          {
+                            this.state.tiposMedida.map((medida) => (
+
+                              <MenuItem value={medida.idMedida}>{medida.nombre}</MenuItem>
+                            ))
+                          }
+
+                        </TextField></div>
+
+                      <div style={{ display: "flex", justifyContent: "center" }}>
+                        <TextField
+
+                          autoFocus
+                          margin="normal"
+                          name="valorMedida"
+                          value={this.state.valorMedida}
+                          label="Valor de la Medida"
+                          type="number"
+                          onChange={this.onChange}
+
+                        />
+                      </div>
+                      {
+                        <p className={classes.divider}>
+                          {errores}
+                        </p>
+                      }
+                    </CardBody>
+                    <CardFooter className={classes.cardFooter}>
+                      <RDialog nombreBtn="Registrar Subscripcion" mensaje={errores} />
+                    </CardFooter>
+                  </form>
+                </Card>
+              </GridItem>
+            </GridContainer>
+          </div>
+          <Footer whiteFont />
+        </div>
+      </div>
+    );
+  }
+}
 export default withStyles(registerPageStyle)(TomarMedidaCliente);

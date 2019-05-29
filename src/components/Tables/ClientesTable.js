@@ -10,7 +10,7 @@ class ClientesTable extends React.Component {
   render() {
     return (
       <MaterialTable
-        title="Remote Data Preview"
+        title=""
         columns={[
           { title: 'Documento', field: 'documento' },
           { title: 'Nombre', field: 'nombres' },

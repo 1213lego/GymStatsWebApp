@@ -40,12 +40,12 @@ class AdminTarifasPage extends React.Component {
           }}
           {...rest}
         />
-        <Parallax filter image={require("assets/img/bgprincipal.jpg")}>
+        <Parallax filter image={require("assets/img/maquinaimage.jpg")}>
           <div className={classes.container}>
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
 
-                <h1>Modulo Añadir Maquinas</h1>
+                <h2>Modulo Añadir Maquinas</h2>
                 <br />
 
               </GridItem>

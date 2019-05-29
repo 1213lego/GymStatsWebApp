@@ -19,17 +19,27 @@ import AdminListarEmpPage from "views/AdminListarEmpPage/AdminListarEmpPage.jsx"
 import ListarClientes from "views/ListarClientes/ListaClientes.jsx"
 import HistorialSuscripciones from "views/HistorialSuscripciones/HistorialSuscripciones.jsx"
 import EmployerTipoMedidaPage from "views/EmployerTipoMedidaPage/EmployerTipoMedidaPage.jsx";
-import TomarMedidasCliente from "views/TomarMedidasCliente/TomarMedidasCliente.jsx";
+import TomarMedidasCliente from "views/TomarMedidasCliente/TomarMedidasCliente.jsx"
+import AdminListarAsistenciaEmpPage from "./views/AdminListarAsistenciaEmpPage/AdminListarAsistenciaEmpPage.jsx";
+import ListarAsistenciaClientes from "./views/ListarAsistenciaClientes/ListarAsistenciaClientes";
 import AgregarRutinaPage from "views/AgregarRutinaPage/AgregarRutinaPage.jsx";
-
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+export const MainSwal = withReactContent(Swal)
 var hist = createBrowserHistory();
+<<<<<<< HEAD
 export const BASE_URL = "http://10.30.4.52:8080";
+=======
+export const BASE_URL = "http://localhost:8080";
+>>>>>>> 9af59b6fd3c23927644aae5daf16e09d19065b4d
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
-    <Route path ="/empleado/agregar-rutinas" component={AgregarRutinaPage}/>
+      <Route path="/admin/asistencia-empleados" component={AdminListarAsistenciaEmpPage}></Route>
+      <Route path="/asistencia-clientes" component={ListarAsistenciaClientes}></Route>
+      <Route path ="/empleado/agregar-rutinas" component={AgregarRutinaPage}/>
       <Route path ="/empleado/tomar-medidas" component={TomarMedidasCliente}/>
-    <Route path="/empleado/añadir-medidas" component={EmployerTipoMedidaPage} />
+      <Route path="/empleado/añadir-medidas" component={EmployerTipoMedidaPage} />
       <Route path="/admin/mis-empleados" component={AdminListarEmpPage} />
       <Route path="/clientes-suscripciones" component={HistorialSuscripciones} />
       <Route path="/clientes" component={ListarClientes} />
