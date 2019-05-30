@@ -25,12 +25,14 @@ import ListarAsistenciaClientes from "./views/ListarAsistenciaClientes/ListarAsi
 import AgregarRutinaPage from "views/AgregarRutinaPage/AgregarRutinaPage.jsx";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import ListaMedidasCliente from "./views/TomarMedidasCliente/ListaMedidasCliente";
 export const MainSwal = withReactContent(Swal)
 var hist = createBrowserHistory();
 export const BASE_URL = "http://localhost:8080";
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
+      <Route path="/clientes/mis-medidas" component={ListaMedidasCliente}></Route>
       <Route path="/admin/asistencia-empleados" component={AdminListarAsistenciaEmpPage}></Route>
       <Route path="/asistencia-clientes" component={ListarAsistenciaClientes}></Route>
       <Route path ="/empleado/agregar-rutinas" component={AgregarRutinaPage}/>

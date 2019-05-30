@@ -22,7 +22,7 @@ import { Redirect } from 'react-router-dom'
 import registerPageStyle from "assets/jss/material-kit-react/views/registerPage.jsx";
 import RDialog from "components/FormDialog/Dialogs/registrarAsistenciaDialog.jsx"
 import image from "assets/img/bggym.jpg";
-import { validarToken, BASE_URL } from "../../index.js";
+import { validarToken, BASE_URL, MainSwal } from "../../index.js";
 import { TextField, MenuItem, Input } from "@material-ui/core";
 class TomarMedidaCliente extends React.Component {
   constructor(props) {
@@ -70,6 +70,17 @@ class TomarMedidaCliente extends React.Component {
       let response = await fetch(BASE_URL + "/empleados/añadir-medida-cliente", myInit);
       if (response.status == 201) {
         this.setState({ errores: 'Se ha registrado la medida con exito a :' + this.state.documento })
+      }
+      else{
+        MainSwal.fire(
+          {
+            position: 'top-end',
+          type: 'error',
+          title: 'Something went wrong!',
+          showConfirmButton: false,
+          timer: 1500
+          }
+        )
       }
     }
     catch (e) {

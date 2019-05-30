@@ -127,7 +127,7 @@ class HeaderLinks extends React.Component {
           className: classes.navLink,
           color: "transparent"
         }}
-        buttonIcon={Apps}
+        
         dropdownList={[
           <Link to="/" className={classes.dropdownLink}>
             {"Documento " + localStorage.getItem("documento")}
@@ -273,6 +273,10 @@ function MenuCliente(props) {
               </Link>,
           <Link to="/clientes-suscripciones" className={props.classes.dropdownLink}>
             Mis suscripciones
+            </Link>
+            ,
+          <Link to="/clientes/mis-medidas" className={props.classes.dropdownLink}>
+            Mis Medidas
             </Link>,
           <a
             href="https://creativetimofficial.github.io/material-kit-react/#/documentation"
