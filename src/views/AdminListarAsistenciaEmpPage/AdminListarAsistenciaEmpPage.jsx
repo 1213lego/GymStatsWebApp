@@ -13,10 +13,11 @@ import GridItem from "components/Grid/GridItem.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.jsx";
-import ClientesTable from "../../components/Tables/ClientesTable";
+import AsistenciaTable from "../../components/Tables/AsistenciaTable";
+
 const dashboardRoutes = [];
 
-class ListaClientes extends React.Component {
+class AdminListarAsistenciaEmpPage extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -36,11 +37,13 @@ class ListaClientes extends React.Component {
           }}
           {...rest}
         />
-      <Parallax filter image={require("assets/img/1.PNG")}>
+      <Parallax filter image={require("assets/img/empleados.jpg")}>
           <div className={classes.container}>
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
-                <h3>Mis Clientes</h3>
+
+                <h2>Asistencias de Mis Empleados</h2>
+
                 <br />
 
               </GridItem>
@@ -55,7 +58,6 @@ class ListaClientes extends React.Component {
             display: "flex"
           }}
         >
-          <h2> Lista De Clientes</h2>
         </div>
         <div
           style={{
@@ -65,7 +67,19 @@ class ListaClientes extends React.Component {
             marginTop: "20px"
           }}
         >
-        <ClientesTable/>
+        <AsistenciaTable 
+        columns={[
+          { title: 'Documento', field: 'usuario.documento' },
+          { title: 'Nombre', field: 'usuario.nombres' },
+          { title: 'Apellidos', field: 'usuario.apellidos'},
+          { title: 'Fecha de ingreso', field: 'fechaIngreso' },
+          { title: 'Fecha de salida' , field: 'fechaSalida' },
+          { title: 'Tipo Empleado', field: 'usuario.empleado.tipoEmpleado.tipoUsuario' }
+        ]}
+        title={" "}
+        ruta={"/admin/asistencia-empleados"}
+        >
+        </AsistenciaTable>
         </div>
 
       </div>
@@ -73,5 +87,5 @@ class ListaClientes extends React.Component {
     );
   }
 }
-export default withStyles(landingPageStyle) (ListaClientes);
+export default withStyles(landingPageStyle) (AdminListarAsistenciaEmpPage);
 

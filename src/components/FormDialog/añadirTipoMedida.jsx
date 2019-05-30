@@ -42,83 +42,53 @@ class FormDialog extends React.Component {
     super(props);
     this.state = {
       open: false,
-      estadosMaquinas: [],
-      nombre: '',
-      marca: '',
-      fechaCompra :'',
       descripcion: '',
-      idEstadoMaquina : null
+      nombre: ''
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-
-
-
   }
-  componentWillMount()
-  {
-    fetch(BASE_URL+'/estadosmaquina').then(response =>{
-      return response.json();
-    }).then(estadosMaquinas => {
-      this.setState({estadosMaquinas:estadosMaquinas});
-    });
-  }
+  
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  onSubmit(e){
+  async onSubmit(e){
     e.preventDefault();
-    const nuevaMaquina = {
-      nombre: this.state.nombre,
-      marca: this.state.marca,
-      fechaCompra: this.state.fechaCompra,
+    const tipoMedida= {
       descripcion: this.state.descripcion,
-      estadosMaquina : {
-        idEstadoMaquina: this.state.idEstadoMaquina
-      }
+      nombre: this.state.nombre
     };
-    console.log(nuevaMaquina);
     var myInit =
     {
         method: 'POST',
-        body: JSON.stringify(nuevaMaquina),headers:{
+        body: JSON.stringify(tipoMedida),headers:{
           'Content-Type': 'application/json',
           'Authorization': localStorage.getItem('token')
         }
-
     };
-    fetch((BASE_URL+'/admin/maquinas'), myInit)
-    .then(response => {
-      console.log(response);
-      if(response.status==201)
-      {
-        MainSwal.fire(
-          {
-            position: 'top-end',
+    let reponse = await fetch(BASE_URL+"/empleados/tipos-medida",myInit);
+    if(reponse.status==201){
+      MainSwal.fire({
+        position: 'top-end',
         type: 'success',
         title: 'Your work has been saved',
         showConfirmButton: false,
         timer: 1500
-          }
-        )
-      }
-      else{
-        MainSwal.fire(
-          {
-            position: 'top-end',
-            type: 'error',
-            title: 'Something went wrong!',
-            showConfirmButton: false,
-            timer: 1500
-          }
-        )
-      }
-      return response.json();
-    }).then(data=>{console.log(data)});
-
+      })
+    }
+    else{
+      MainSwal.fire(
+        {
+          position: 'top-end',
+          type: 'error',
+          title: 'Something went wrong!',
+          showConfirmButton: false,
+          timer: 1500
+        }
+      )
+    }
   }
-
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -133,7 +103,7 @@ class FormDialog extends React.Component {
       <Fragment>
       <div style={{marginTop:"40px"}}>
       <Button variant="raised" color="#d39539" onClick={this.handleClickOpen}>
-          <h4>Añadir Maquina</h4>
+          <h4>Añadir Tipo De Medida</h4>
         </Button>
         </div>
         <Dialog
@@ -141,28 +111,18 @@ class FormDialog extends React.Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title" style={{justifyContent:"center",alignItems:"center",display:"flex "}}>Añadir Maquina</DialogTitle>
+          <DialogTitle id="form-dialog-title" style={{justifyContent:"center",alignItems:"center",display:"flex "}}>Añadir Tipo Medida</DialogTitle>
           <form onSubmit={this.onSubmit}>
           <DialogContent>
             <DialogContentText>
-                Rellenar el formulario para añadir una maquina a la base de datos
+                Rellenar el formulario para añadir un tipo de medida a la base de datos
             </DialogContentText>
-
             <TextField
               autoFocus
               color="#d39539"
               margin="dense"
               name="nombre"
-              label="Nombre Maquina"
-              type="text"
-              onChange={this.onChange}
-              fullWidth
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              name="marca"
-              label="Marca"
+              label="Nombre Del Tipo de la Medida"
               type="text"
               onChange={this.onChange}
               fullWidth
@@ -176,52 +136,14 @@ class FormDialog extends React.Component {
               onChange={this.onChange}
               fullWidth
             />
-            <TextField
-              id="tipoEstadosMaquinaSpinner"
-              select
-                name="idEstadoMaquina"
-                label="Estado de la Maquina"
-                margin="dense"
-                className={classes.textField}
-                value={this.state.idEstadoMaquina}
-                onChange={this.onChange}
-                SelectProps={{
-                  MenuProps: {
-                    className: classes.menu,
-                  },
-                }}
-              >
-                {
-                  this.state.estadosMaquinas.map((estadoMaquina) => (
-                    <MenuItem value={estadoMaquina.idEstadoMaquina}>{estadoMaquina.estadoMaquina}</MenuItem>
-                  ))
-                }
-              </TextField>
-            <TextField
-              autoFocus
-              margin="dense"
-              name="fechaCompra"
-              id="date"
-              label="Fecha Compra"
-              type="date"
-              defaultValue={this.todayDate}
-              onChange={this.onChange}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-
-
-
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
               Cancelar
             </Button>
             <Button onSubmit onClick={this.handleClose} color="primary" variant="raised" type="submit">
-              Agregar Maquina
+              Añadir Tipo De Medida
             </Button>
-
           </DialogActions>
           </form>
         </Dialog>

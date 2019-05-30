@@ -1,30 +1,34 @@
 import React from "react";
-import { BASE_URL } from "../..";
-
+// nodejs library that concatenates classes
+import classNames from "classnames";
+// @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 
 // @material-ui/icons
 
 // core components
 import Header from "components/Header/Header.jsx";
-
+import Footer from "components/Footer/Footer.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
+import Button from "components/CustomButtons/Button.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
+import AñadirTipoMedida from "components/FormDialog/añadirTipoMedida.jsx";
+import TipoMedida from "../Components/Sections/TipoMedida.jsx"
 import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.jsx";
-import ClientesTable from "../../components/Tables/ClientesTable";
+
+// Sections for this page
+
+
 const dashboardRoutes = [];
 
-class ListaClientes extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+class AdminTarifasPage extends React.Component {
   render() {
-    const  {classes,... rest}  = this.props;
+    const { classes, ...rest } = this.props;
     return (
-      <div style={{ justifyContent: "center", alignItems: "center" }}>
-      <Header
+      <div>
+        <Header
           color="transparent"
           routes={dashboardRoutes}
           brand="GymStats"
@@ -36,42 +40,29 @@ class ListaClientes extends React.Component {
           }}
           {...rest}
         />
-      <Parallax filter image={require("assets/img/1.PNG")}>
+        <Parallax filter image={require("assets/img/medidas.jpg")}>
           <div className={classes.container}>
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
-                <h3>Mis Clientes</h3>
+
+                <h2>Modulo Añadir Tipos De Medida</h2>
                 <br />
 
               </GridItem>
             </GridContainer>
           </div>
         </Parallax>
-        <div
-          style={{
-            position: "center",
-            marginTop: "20px",
-            justifyContent: "center",
-            display: "flex"
-          }}
-        >
-          <h2> Lista De Clientes</h2>
+        <div className={classNames(classes.main, classes.mainRaised)}>
+          <div className={classes.container}>
+            <div style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
+            <AñadirTipoMedida/>
+            </div>
+          </div>
+          <TipoMedida/>
         </div>
-        <div
-          style={{
-            alignItems: "center",
-            display: "block",
-            justifyContent: "center",
-            marginTop: "20px"
-          }}
-        >
-        <ClientesTable/>
-        </div>
-
-      </div>
-      
+  </div>
     );
   }
 }
-export default withStyles(landingPageStyle) (ListaClientes);
 
+export default withStyles(landingPageStyle)(AdminTarifasPage);
